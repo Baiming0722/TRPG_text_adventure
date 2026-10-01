@@ -1,0 +1,12 @@
+{
+  "id": "char_001", "name": "林艾莉", "class": "學生",
+  "background": "某大學三年級的生物系學生。平時熱愛閱讀科幻小說，動作敏捷但不擅長體力勞動。",
+  "stats": { "STR": 35, "DEX": 55, "INT": 65, "POW": 45, "MOV": 55 },
+  "derived_stats": { "HP": 80, "SAN": 60, "LUCK": 55 },
+  "skills": [
+    { "id": "skill_dodge", "name": "閃避", "bonus": 3, "type": "DEX" },
+    { "id": "skill_run", "name": "奔跑", "bonus": 2, "type": "MOV" },
+    { "id": "skill_biology", "name": "生物知識", "bonus": 2, "type": "INT" }
+  ],
+  "inventory": [], "status_effects": [], "temp_modifiers": []
+}

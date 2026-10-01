@@ -1,0 +1,17 @@
+{
+  "id": "scenario_002",
+  "title": "第一章：死寂宿舍",
+  "chapter": 2,
+  "description": "成功逃出實驗室後，你來到了一處看似員工宿舍的區域。這裡的燈光昏暗閃爍，走廊上散落著日常用品與匆忙留下的血跡，彷彿所有人都在同一時間人間蒸發。你需要穿過這片死寂的區域，尋找通往上層的電梯權限，同時防備隱藏在暗處的威脅。",
+  "worldview": "這裡曾是研究人員的起居空間，展現了這間生技公司龐大的規模與封閉性。宿舍區的混亂暗示著這場災難爆發得極為突然，連最核心的員工都未能倖免。這反映出公司實驗的極度危險性與失控程度。",
+  "entry_condition": { "flag": "found_key_card" },
+  "exit_conditions": {
+    "success": { "flag": "unlocked_elevator" },
+    "failure": { "hp_lte": 0 },
+    "normal": { "flag": "escaped_by_stairs" },
+    "open": { "flag": "found_survivor_diary" }
+  },
+  "key_events": ["event_004", "event_005", "event_006"],
+  "available_map": "map_002",
+  "starting_node": "node_dorm_entrance"
+}

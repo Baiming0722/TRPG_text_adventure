@@ -1,0 +1,24 @@
+{
+  "id": "char_009",
+  "name": "張心怡",
+  "class": "記者",
+  "age": 29,
+  "gender": "女",
+  "personality": "好奇、勇敢、口齒伶俐",
+  "wealth": "普通",
+  "background": "獨立媒體的調查記者，為了追蹤真相可以不顧一切。擅長與人交涉，並具備優良的觀察力與潛行追蹤的技巧。",
+  "stats": { "STR": 35, "DEX": 50, "INT": 65, "POW": 60, "MOV": 55 },
+  "derived_stats": { "HP": 85, "SAN": 60, "LUCK": 70 },
+  "skills": [
+    { "id": "skill_persuade", "name": "話術交涉", "bonus": 4, "type": "POW" },
+    { "id": "skill_stealth", "name": "潛行", "bonus": 2, "type": "DEX" },
+    { "id": "skill_photography", "name": "攝影與紀錄", "bonus": 3, "type": "INT" }
+  ],
+  "inventory": [
+    { "item": "單眼相機", "quantity": 1 },
+    { "item": "錄音筆", "quantity": 1 },
+    { "item": "記者證", "quantity": 1 }
+  ],
+  "status_effects": [],
+  "temp_modifiers": []
+}

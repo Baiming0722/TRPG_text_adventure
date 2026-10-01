@@ -1,0 +1,12 @@
+{
+  "id": "char_002", "name": "陳博士", "class": "教師",
+  "background": "生物技術研究所的資深教授，深諳學術研究。思維敏銳，說話有條理，危急時刻能保持冷靜。",
+  "stats": { "STR": 30, "DEX": 35, "INT": 75, "POW": 65, "MOV": 35 },
+  "derived_stats": { "HP": 70, "SAN": 75, "LUCK": 45 },
+  "skills": [
+    { "id": "skill_think", "name": "深度分析", "bonus": 3, "type": "INT" },
+    { "id": "skill_calm", "name": "冷靜處理", "bonus": 2, "type": "POW" },
+    { "id": "skill_research", "name": "研究知識", "bonus": 2, "type": "INT" }
+  ],
+  "inventory": [], "status_effects": [], "temp_modifiers": []
+}

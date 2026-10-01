@@ -1,0 +1,85 @@
+# 專案結構 (Project Structure)
+
+- `debug.html`
+- `index.html`
+- `server.js`
+- `start.bat`
+- `TRPG_Specification.md`
+- `.agent/`
+  - `skills/`
+    - `README.md`
+    - `character/`
+      - `README.md`
+    - `combat/`
+      - `README.md`
+    - `debug_monitor/`
+      - `README.md`
+    - `dice/`
+      - `README.md`
+    - `event/`
+      - `README.md`
+    - `map/`
+      - `README.md`
+    - `narrative/`
+      - `README.md`
+    - `save/`
+      - `README.md`
+    - `ui/`
+      - `README.md`
+- `cards/`
+  - `characters/`
+    - `char_001.json`
+    - `char_002.json`
+    - `char_003.json`
+    - `char_004.json`
+    - `char_005.json`
+  - `events/`
+    - `event_001.json`
+    - `event_002.json`
+    - `event_special_001.json`
+  - `maps/`
+    - `map_001.json`
+  - `scenarios/`
+    - `scenario_001.json`
+- `character/`
+  - `character-system.js`
+- `combat/`
+  - `combat-system.js`
+- `css/`
+  - `components.css`
+  - `debug.css`
+  - `effects.css`
+  - `main.css`
+- `debug_monitor/`
+  - `debug-monitor.js`
+- `dice/`
+  - `dice-system.js`
+- `event/`
+  - `event-system.js`
+- `js/`
+  - `app.js`
+  - `config.js`
+  - `event-bus.js`
+  - `game-engine.js`
+  - `game-state.js`
+  - `i18n.js`
+- `map/`
+  - `map-system.js`
+- `narrative/`
+  - `llm-provider.js`
+  - `narrative-engine.js`
+- `save/`
+  - `save-system.js`
+- `ui/`
+  - `action-panel.js`
+  - `character-panel.js`
+  - `dice-animation.js`
+  - `explore-panel.js`
+  - `game-log.js`
+  - `map-view.js`
+  - `mode-select.js`
+  - `save-drawer.js`
+  - `scene-renderer.js`
+  - `test-panel.js`
+  - `tutorial.js`
+  - `ui-manager.js`

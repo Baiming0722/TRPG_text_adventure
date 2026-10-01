@@ -1,0 +1,50 @@
+{
+  "id": "map_004",
+  "name": "地下運輸鐵道",
+  "description": "為了秘密運輸物資而建立的地下鐵道系統，也是逃離設施的最後路線。",
+  "nodes": [
+    {
+      "id": "node_station_platform",
+      "name": "鐵道月台",
+      "description": "寬廣的地下站台，設施自毀的警報聲在這裡聽得一清二楚。",
+      "events": ["event_010"],
+      "connections": ["node_control_room", "node_dark_tunnel"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_control_room",
+      "name": "站台控制室",
+      "description": "可以用來調度列車與開啟隧道大門的控制間。",
+      "events": [],
+      "connections": ["node_station_platform"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_dark_tunnel",
+      "name": "隧道入口",
+      "description": "月台末端通往漆黑深處的隧道，裡面似乎傳來沉重的腳步聲...",
+      "events": ["event_011"],
+      "connections": ["node_station_platform", "node_train_cabin"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_train_cabin",
+      "name": "逃生列車",
+      "description": "停在鐵軌上的老舊運輸列車，控制台還在運作。",
+      "events": ["event_012"],
+      "connections": ["node_dark_tunnel"],
+      "entry_condition": {
+        "flag": "survived_alpha",
+        "fail_message": "怪物擋住了去路，你無法安全登上列車！"
+      },
+      "explored": false,
+      "locked": true
+    }
+  ]
+}

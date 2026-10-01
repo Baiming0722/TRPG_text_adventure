@@ -1,0 +1,15 @@
+{
+  "id": "event_012",
+  "title": "逃出生天",
+  "description": "玩家成功啟動列車",
+  "trigger_condition": { "flag": "survived_alpha" },
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "boarded_train",
+      "value": true,
+      "description": "成功搭上逃生列車"
+    }
+  ],
+  "narrative": "你用盡全力扳下控制台的啟動把手，列車發出刺耳的摩擦聲緩緩向前滑行。阿爾法憤怒地捶打著逐漸遠去的車廂尾部。隨著列車加速駛入黑暗的隧道，身後的設施爆發出耀眼的火光與劇烈的震動。你癱坐在駕駛座上，終於活下來了。"
+}

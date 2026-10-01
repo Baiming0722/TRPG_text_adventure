@@ -1,0 +1,17 @@
+{
+  "id": "scenario_003",
+  "title": "第二章：深淵檔案室",
+  "chapter": 3,
+  "description": "抵達了管理層的辦公區域，這裡的裝潢比底層高級許多，但同樣透著詭異的死寂。你的目標是公司的中央檔案室，試圖從伺服器中還原這間公司究竟在進行什麼恐怖的實驗，以及你自己的真實身分。然而，系統的防禦機制與徘徊的異變體正等待著你。",
+  "worldview": "檔案室儲存著「代號：深淵」計畫的核心資料。這不僅是生技領域的突破，更牽涉到與某種未知外星或古老物質的接觸。人類的貪婪與對未知力量的渴望，最終導致了這場無可挽回的災難。",
+  "entry_condition": { "flag": "unlocked_elevator" },
+  "exit_conditions": {
+    "success": { "flag": "downloaded_core_data" },
+    "failure": { "hp_lte": 0 },
+    "normal": { "flag": "server_destroyed" },
+    "open": { "flag": "discovered_own_identity" }
+  },
+  "key_events": ["event_007", "event_008", "event_009"],
+  "available_map": "map_003",
+  "starting_node": "node_office_hall"
+}

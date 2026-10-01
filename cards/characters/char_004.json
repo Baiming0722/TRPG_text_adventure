@@ -1,0 +1,12 @@
+{
+  "id": "char_004", "name": "張工", "class": "工程師",
+  "background": "軟體公司的資深後端工程師。邏輯嚴密，善於分析問題，對科技設備有著超乎常人的理解力。",
+  "stats": { "STR": 35, "DEX": 45, "INT": 70, "POW": 55, "MOV": 40 },
+  "derived_stats": { "HP": 75, "SAN": 70, "LUCK": 50 },
+  "skills": [
+    { "id": "skill_hacking", "name": "系統入侵", "bonus": 3, "type": "INT" },
+    { "id": "skill_analyze", "name": "邏輯分析", "bonus": 2, "type": "INT" },
+    { "id": "skill_meditate", "name": "冥想專注", "bonus": 2, "type": "POW" }
+  ],
+  "inventory": [], "status_effects": [], "temp_modifiers": []
+}

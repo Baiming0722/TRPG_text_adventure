@@ -1,0 +1,15 @@
+{
+  "id": "event_004",
+  "title": "踏入死寂",
+  "description": "玩家進入員工宿舍區",
+  "trigger_condition": { "flag": "found_key_card" },
+  "effects": [
+    {
+      "type": "add_item",
+      "key": "flashlight",
+      "value": 1,
+      "description": "獲得手電筒"
+    }
+  ],
+  "narrative": "你用門禁卡刷開了厚重的鐵門，迎面而來的是令人窒息的死寂。宿舍區的日光燈不斷閃爍，地上散落著員工的私人物品，甚至還有幾道觸目驚心的血痕拖曳進了黑暗深處。你順手在門口的警衛桌上拿起了一把手電筒。"
+}

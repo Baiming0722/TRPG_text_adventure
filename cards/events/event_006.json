@@ -1,0 +1,15 @@
+{
+  "id": "event_007",
+  "title": "抵達管理層",
+  "description": "玩家乘坐電梯抵達高階主管與檔案室所在的樓層",
+  "trigger_condition": { "flag": "unlocked_elevator" },
+  "effects": [
+    {
+      "type": "add_item",
+      "key": "map_chip",
+      "value": 1,
+      "description": "獲得管理層地圖晶片"
+    }
+  ],
+  "narrative": "電梯門一開，映入眼簾的是鋪著地毯的高級辦公區。與底層的混亂不同，這裡出奇的整潔，甚至連一絲血跡都沒有，彷彿所有人在災難發生前就已撤離。中央走廊的盡頭，便是厚重裝甲門保護著的「深淵檔案室」。"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "scenario_004",
+  "title": "第三章：地下鐵道",
+  "chapter": 4,
+  "description": "得知了真相後，你必須盡快離開這座即將自毀的地下設施。唯一的逃生路線是專用的地下運輸鐵道。但在黑暗的隧道中，最可怕的實驗體「阿爾法」已經掙脫了束縛，正循著你的氣味追來。這是一場與時間和死亡的賽跑。",
+  "worldview": "地下鐵道連接著秘密設施與地表的偽裝建築。這裡的環境陰暗潮濕，充滿了管線與機械結構。實驗體阿爾法是整個設施中最危險的存在，象徵著人類試圖控制超越自身理解力量的失敗下場。",
+  "entry_condition": { "flag": "downloaded_core_data" },
+  "exit_conditions": {
+    "success": { "flag": "boarded_train" },
+    "failure": { "hp_lte": 0 },
+    "normal": { "flag": "facility_exploded" },
+    "open": { "flag": "killed_alpha" }
+  },
+  "key_events": ["event_010", "event_011", "event_012"],
+  "available_map": "map_004",
+  "starting_node": "node_station_platform"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "char_008",
+  "name": "趙鐵柱",
+  "class": "警察",
+  "age": 32,
+  "gender": "男",
+  "personality": "正義、嚴肅、機警",
+  "wealth": "普通",
+  "background": "基層巡邏員警，具備一定的防身與射擊技巧。長期在街頭巡邏，對周遭環境的變化很敏銳，體能保持得不錯。",
+  "stats": { "STR": 65, "DEX": 60, "INT": 50, "POW": 55, "MOV": 60 },
+  "derived_stats": { "HP": 125, "SAN": 55, "LUCK": 50 },
+  "skills": [
+    { "id": "skill_shoot", "name": "手槍射擊", "bonus": 3, "type": "DEX" },
+    { "id": "skill_grapple", "name": "擒拿術", "bonus": 3, "type": "STR" },
+    { "id": "skill_investigate", "name": "現場偵查", "bonus": 2, "type": "INT" }
+  ],
+  "inventory": [
+    { "item": "警棍", "quantity": 1 },
+    { "item": "手銬", "quantity": 1 },
+    { "item": "無線電", "quantity": 1 }
+  ],
+  "status_effects": [],
+  "temp_modifiers": []
+}

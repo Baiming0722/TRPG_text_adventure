@@ -1,0 +1,29 @@
+{
+  "id": "event_special_001",
+  "title": "發現識別卡",
+  "description": "在核心研究室中發現緊急出口識別卡",
+  "trigger_condition": {
+    "flag": "node_node_004_explored",
+    "flag_value": true
+  },
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "found_key_card",
+      "value": true,
+      "description": "找到了緊急出口識別卡"
+    },
+    {
+      "type": "unlock_node",
+      "node_id": "node_005",
+      "node_name": "緊急出口"
+    },
+    {
+      "type": "add_item",
+      "item_id": "item_key_card",
+      "item_name": "緊急識別卡",
+      "description": "B2 實驗區的緊急出口識別卡，可以開啟緊急出口的電子鎖。"
+    }
+  ],
+  "narrative": "在研究室角落的保險箱後面，你發現了一張印有「EMERGENCY」字樣的識別卡。這應該就是緊急出口的鑰匙！"
+}

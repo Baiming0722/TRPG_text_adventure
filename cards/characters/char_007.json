@@ -1,0 +1,23 @@
+{
+  "id": "char_007",
+  "name": "林曉美",
+  "class": "護理師",
+  "age": 25,
+  "gender": "女",
+  "personality": "溫柔、細心、抗壓性強",
+  "wealth": "普通",
+  "background": "急診室的護理師，習慣了高壓的環境與生老病死。動作俐落，懂得基本的醫療急救，並且很會安撫人心。",
+  "stats": { "STR": 40, "DEX": 60, "INT": 55, "POW": 60, "MOV": 50 },
+  "derived_stats": { "HP": 100, "SAN": 60, "LUCK": 45 },
+  "skills": [
+    { "id": "skill_firstaid", "name": "急救", "bonus": 4, "type": "INT" },
+    { "id": "skill_comfort", "name": "安撫", "bonus": 3, "type": "POW" },
+    { "id": "skill_agile", "name": "敏捷動作", "bonus": 2, "type": "DEX" }
+  ],
+  "inventory": [
+    { "item": "隨身急救包", "quantity": 1 },
+    { "item": "手電筒", "quantity": 1 }
+  ],
+  "status_effects": [],
+  "temp_modifiers": []
+}

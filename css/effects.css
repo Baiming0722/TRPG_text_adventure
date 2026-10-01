@@ -1,0 +1,1677 @@
+﻿/* css/effects.css - 視覺特效強化層 */
+
+/* ===================================================
+   動態背景環境光 (Ambient Orbs)
+   =================================================== */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0;
+  animation: orbPulse 8s ease-in-out infinite;
+}
+
+/* 各主題光球顏色由 data-theme 控制 */
+[data-theme="scifi-horror"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(123,74,226,0.25), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="scifi-horror"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(74,143,224,0.2), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="scifi-horror"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(123,74,226,0.12), transparent 70%);
+  animation-delay: -6s;
+}
+
+[data-theme="fantasy"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(200,146,42,0.2), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="fantasy"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(224,80,32,0.15), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="fantasy"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(200,146,42,0.1), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="steampunk"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(184,118,30,0.2), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="steampunk"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(128,64,32,0.18), transparent 70%);
+  animation-delay: -4s;
+}
+[data-theme="steampunk"] .bg-orb-3 {
+  width: 300px; height: 300px;
+  top: 50%; right: 20%;
+  background: radial-gradient(circle, rgba(184,118,30,0.1), transparent 70%);
+  animation-delay: -7s;
+}
+
+[data-theme="cyberpunk"] .bg-orb-1 {
+  width: 700px; height: 700px;
+  top: -25%; left: -15%;
+  background: radial-gradient(circle, rgba(0,200,200,0.22), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="cyberpunk"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -20%; right: -10%;
+  background: radial-gradient(circle, rgba(255,0,255,0.18), transparent 70%);
+  animation-delay: -2.5s;
+}
+[data-theme="cyberpunk"] .bg-orb-3 {
+  width: 350px; height: 350px;
+  top: 30%; right: 25%;
+  background: radial-gradient(circle, rgba(0,200,200,0.1), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="future"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="future"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="future"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(255,255,255,0.02), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="abyss"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="abyss"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(16,185,129,0.15), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="abyss"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="hope"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(14,165,233,0.18), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="hope"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(56,189,248,0.12), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="hope"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(14,165,233,0.08), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="classical"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(202,138,4,0.15), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="classical"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(133,77,14,0.12), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="classical"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(202,138,4,0.08), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="epic"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(253,224,71,0.22), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="epic"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(180,83,9,0.15), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="epic"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(253,224,71,0.1), transparent 70%);
+  animation-delay: -5s;
+}
+
+[data-theme="mythology"] .bg-orb-1 {
+  width: 600px; height: 600px;
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, rgba(220,38,38,0.25), transparent 70%);
+  animation-delay: 0s;
+}
+[data-theme="mythology"] .bg-orb-2 {
+  width: 500px; height: 500px;
+  bottom: -15%; right: -8%;
+  background: radial-gradient(circle, rgba(127,29,29,0.18), transparent 70%);
+  animation-delay: -3s;
+}
+[data-theme="mythology"] .bg-orb-3 {
+  width: 400px; height: 400px;
+  top: 40%; left: 35%;
+  background: radial-gradient(circle, rgba(220,38,38,0.1), transparent 70%);
+  animation-delay: -5s;
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: 1; transform: scale(1) translate(0, 0); }
+  33%       { opacity: 0.7; transform: scale(1.08) translate(20px, -15px); }
+  66%       { opacity: 0.9; transform: scale(0.95) translate(-10px, 20px); }
+}
+
+/* ===================================================
+   CRT 掃描線覆蓋層 (僅科幻 / 賽博龐克主題顯示)
+   =================================================== */
+#crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme="scifi-horror"] #crt-overlay,
+[data-theme="cyberpunk"] #crt-overlay {
+  opacity: 1;
+}
+
+/* 細掃描線 */
+#crt-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+/* 移動高光掃描條 */
+#crt-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.025),
+    transparent
+  );
+  animation: scanSweep 6s linear infinite;
+}
+
+@keyframes scanSweep {
+  from { top: -120px; }
+  to   { top: 100vh; }
+}
+
+/* ===================================================
+   Glitch 特效（標題）
+   =================================================== */
+.glitch-text {
+  position: relative;
+}
+
+[data-theme="scifi-horror"] .glitch-text,
+[data-theme="cyberpunk"] .glitch-text {
+  animation: glitchText 8s ease-in-out infinite;
+}
+
+@keyframes glitchText {
+  0%, 90%, 100% {
+    text-shadow: 0 0 16px var(--color-accent-alpha);
+    transform: none;
+  }
+  91% {
+    text-shadow:
+      -2px 0 var(--color-accent-light),
+       2px 0 rgba(74,143,224,0.8),
+       0 0 16px var(--color-accent-alpha);
+    transform: skewX(-1deg);
+  }
+  93% {
+    text-shadow: 0 0 16px var(--color-accent-alpha);
+    transform: skewX(0.5deg);
+  }
+  95% {
+    text-shadow:
+       2px 0 var(--color-accent-light),
+      -2px 0 rgba(74,143,224,0.8),
+       0 0 16px var(--color-accent-alpha);
+    transform: skewX(1deg);
+  }
+  97% {
+    text-shadow: 0 0 16px var(--color-accent-alpha);
+    transform: none;
+  }
+}
+
+/* ===================================================
+   毛玻璃面板強化
+   =================================================== */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===================================================
+   進場動畫 (Staggered Entrance)
+   =================================================== */
+.entrance-anim {
+  animation: entranceUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.entrance-anim-delay-1 { animation-delay: 0.05s; }
+.entrance-anim-delay-2 { animation-delay: 0.12s; }
+.entrance-anim-delay-3 { animation-delay: 0.20s; }
+.entrance-anim-delay-4 { animation-delay: 0.28s; }
+
+@keyframes entranceUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================================
+   Header 強化：漸層底線動畫
+   =================================================== */
+#header {
+  position: relative;
+}
+#header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent-alpha),
+    var(--color-accent),
+    var(--color-accent-alpha),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: headerLineShimmer 4s linear infinite;
+}
+
+@keyframes headerLineShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ===================================================
+   按鈕掃光特效 (Sweep)
+   =================================================== */
+.header-btn {
+  position: relative;
+  overflow: hidden;
+}
+.header-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255,255,255,0.12),
+    transparent
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  transition: none;
+}
+.header-btn:hover::after {
+  animation: btnSweep 0.5s ease forwards;
+}
+@keyframes btnSweep {
+  from { left: -75%; opacity: 1; }
+  to   { left: 125%; opacity: 1; }
+}
+
+/* ===================================================
+   Action 按鈕強化
+   =================================================== */
+.action-btn {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(8px);
+}
+.action-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+}
+.action-btn:hover:not(:disabled)::after {
+  animation: btnSweep 0.6s ease forwards;
+}
+.action-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  box-shadow:
+    0 0 0 1px var(--color-accent-alpha),
+    0 0 20px var(--color-accent-alpha),
+    inset 0 0 20px rgba(255,255,255,0.02);
+  transform: translateY(-2px);
+}
+
+/* ===================================================
+   Stat bar 發光強化
+   =================================================== */
+.stat-bar-fill.hp  {
+  background: linear-gradient(90deg, #c0292920, #e05252);
+  box-shadow: 0 0 12px rgba(224,82,82,0.7);
+}
+.stat-bar-fill.san {
+  background: linear-gradient(90deg, #1a5a7020, #52aae0);
+  box-shadow: 0 0 12px rgba(82,170,224,0.7);
+}
+.stat-bar-fill.luck {
+  background: linear-gradient(90deg, #6a4a0020, #e0c452);
+  box-shadow: 0 0 12px rgba(224,196,82,0.6);
+}
+
+/* ===================================================
+   Stat Cell 懸停發光
+   =================================================== */
+.stat-cell {
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.stat-cell:hover {
+  border-color: var(--color-accent-alpha);
+  box-shadow: 0 0 12px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   場景描述區：打字機光標
+   =================================================== */
+#scene-display .narrative-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--color-accent);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blinkCursor 0.9s step-end infinite;
+}
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ===================================================
+   Log 條目 Hover 高亮
+   =================================================== */
+.log-entry {
+  transition: background 0.15s, padding-left 0.15s;
+  border-radius: 4px;
+  padding-left: 4px;
+}
+.log-entry:hover {
+  background: rgba(255,255,255,0.03);
+  padding-left: 8px;
+}
+
+/* ===================================================
+   Toast 強化
+   =================================================== */
+.toast {
+  backdrop-filter: blur(12px);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+.toast.success {
+  box-shadow: 0 0 16px rgba(61,214,140,0.25);
+}
+.toast.error {
+  box-shadow: 0 0 16px rgba(224,82,82,0.25);
+}
+.toast.info {
+  box-shadow: 0 0 16px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   骰子發光特效
+   =================================================== */
+.die {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-hover));
+  box-shadow:
+    0 0 20px var(--color-accent-alpha),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.die.rolling {
+  box-shadow:
+    0 0 40px var(--color-accent-alpha),
+    0 0 80px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   Modal 強化
+   =================================================== */
+.modal {
+  backdrop-filter: blur(20px);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-strong);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 50px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   Panel Section Title 強化
+   =================================================== */
+.panel-section-title {
+  position: relative;
+  padding-left: var(--space-3);
+}
+.panel-section-title::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 80%;
+  background: var(--color-accent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   Reduced Motion 支援
+   =================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb,
+  #crt-overlay::after,
+  .glitch-text,
+  #header::after,
+  .entrance-anim,
+  .loading-spinner {
+    animation: none !important;
+  }
+  #crt-overlay { display: none; }
+}
+
+/* ===================================================
+   Theme Specific Panel Decorative Styles
+   =================================================== */
+
+/* --- Sci-Fi Space (scifi-horror) Grid overlay --- */
+[data-theme="scifi-horror"] #scene-area,
+[data-theme="scifi-horror"] #sidebar,
+[data-theme="scifi-horror"] #action-area,
+[data-theme="scifi-horror"] #game-log-area {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px), 
+    linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+/* --- Fantasy Adventure (fantasy) deep aurora glow --- */
+[data-theme="fantasy"] #scene-area,
+[data-theme="fantasy"] #sidebar,
+[data-theme="fantasy"] #action-area,
+[data-theme="fantasy"] #game-log-area {
+  box-shadow: 
+    inset 0 0 20px rgba(6, 182, 212, 0.08),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.05),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+}
+
+/* --- Steampunk (steampunk) brass rivets double line border --- */
+[data-theme="steampunk"] #scene-area,
+[data-theme="steampunk"] #sidebar,
+[data-theme="steampunk"] #action-area,
+[data-theme="steampunk"] #game-log-area {
+  border: 3px double var(--color-border-strong) !important;
+  box-shadow: 
+    inset 0 0 15px rgba(180, 83, 9, 0.15),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+  background-image: radial-gradient(circle at 4px 4px, var(--color-border) 2px, transparent 2px) !important;
+  background-size: 16px 16px !important;
+}
+
+/* --- Cyberpunk (cyberpunk) neon drop shadow glow --- */
+[data-theme="cyberpunk"] #scene-area,
+[data-theme="cyberpunk"] #sidebar,
+[data-theme="cyberpunk"] #action-area,
+[data-theme="cyberpunk"] #game-log-area {
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: 
+    0 0 8px rgba(255, 0, 127, 0.2),
+    inset 0 0 8px rgba(0, 255, 255, 0.1),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.1),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+}
+
+/* --- Interstellar (future) solid white borders --- */
+[data-theme="future"] #scene-area,
+[data-theme="future"] #sidebar,
+[data-theme="future"] #action-area,
+[data-theme="future"] #game-log-area {
+  border: 1.5px solid var(--color-border-strong) !important;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.05),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+}
+
+/* --- Abyss (abyss) dark green/purple void shadow --- */
+[data-theme="abyss"] #scene-area,
+[data-theme="abyss"] #sidebar,
+[data-theme="abyss"] #action-area,
+[data-theme="abyss"] #game-log-area {
+  box-shadow: 
+    inset 0 0 25px rgba(139, 92, 246, 0.2),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.04),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+}
+
+/* --- Dawn (hope) white/sky blue glassmorphic light theme --- */
+[data-theme="hope"] #scene-area,
+[data-theme="hope"] #sidebar,
+[data-theme="hope"] #action-area,
+[data-theme="hope"] #game-log-area {
+  border: 1px solid rgba(14, 165, 233, 0.25) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(25px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.05),
+    0 12px 32px -10px rgba(14, 165, 233, 0.15) !important;
+}
+[data-theme="hope"] #scene-area:hover,
+[data-theme="hope"] #sidebar:hover,
+[data-theme="hope"] #action-area:hover,
+[data-theme="hope"] #game-log-area:hover {
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.05),
+    0 16px 40px -8px rgba(14, 165, 233, 0.25) !important;
+}
+
+/* --- Classical (classical) old parchment paper shadow --- */
+[data-theme="classical"] #scene-area,
+[data-theme="classical"] #sidebar,
+[data-theme="classical"] #action-area,
+[data-theme="classical"] #game-log-area {
+  box-shadow: 
+    inset 0 0 30px rgba(133, 77, 14, 0.2),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.05),
+    0 8px 24px -6px var(--color-shadow-glow) !important;
+}
+
+/* --- Epic (epic) royal twin gold borders --- */
+[data-theme="epic"] #scene-area,
+[data-theme="epic"] #sidebar,
+[data-theme="epic"] #action-area,
+[data-theme="epic"] #game-log-area {
+  border: 1.8px solid var(--color-border-strong) !important;
+  box-shadow: 
+    inset 0 0 15px rgba(253, 224, 71, 0.12),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08),
+    0 12px 32px -4px var(--color-shadow-glow) !important;
+}
+
+/* --- Mythology (mythology) red ancient vermilion shadow --- */
+[data-theme="mythology"] #scene-area,
+[data-theme="mythology"] #sidebar,
+[data-theme="mythology"] #action-area,
+[data-theme="mythology"] #game-log-area {
+  border: 1px solid var(--color-border-strong) !important;
+  box-shadow: 
+    inset 0 0 20px rgba(220, 38, 38, 0.15),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.05),
+    0 8px 32px -4px var(--color-shadow-glow) !important;
+}
+
+/* ===================================================
+   Premium 3D Material Layer
+   =================================================== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    var(--theme-pattern),
+    radial-gradient(ellipse at 50% -10%, var(--color-accent-alpha), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 34%, rgba(0,0,0,.22));
+  background-size: var(--theme-pattern-size), auto, auto;
+  opacity: .62;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  perspective: 1400px;
+}
+
+#header {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.24)),
+    color-mix(in srgb, var(--color-bg-base) 72%, transparent) !important;
+  border-bottom-color: var(--color-border-strong);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 14px 34px rgba(0,0,0,.26),
+    0 0 28px var(--color-accent-alpha);
+}
+
+#header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--theme-pattern);
+  background-size: var(--theme-pattern-size);
+  opacity: .18;
+  pointer-events: none;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 78%, transparent);
+}
+
+#scene-area,
+#sidebar,
+#action-area,
+#game-log-area {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,0) 28%),
+    linear-gradient(320deg, rgba(0,0,0,.3), rgba(0,0,0,0) 42%),
+    var(--gradient-surface) !important;
+  border-color: var(--color-border) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.14),
+    inset -1px -1px 0 rgba(0,0,0,.42),
+    0 1px 0 rgba(255,255,255,.06),
+    0 18px 42px rgba(0,0,0,.34),
+    0 0 26px var(--color-accent-alpha) !important;
+  transform-style: preserve-3d;
+}
+
+#scene-area::before,
+#sidebar::before,
+#action-area::before,
+#game-log-area::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background-image:
+    var(--theme-pattern),
+    linear-gradient(180deg, rgba(255,255,255,.08), transparent 34%, rgba(0,0,0,.18));
+  background-size: var(--theme-pattern-size), auto;
+  opacity: .5;
+  pointer-events: none;
+}
+
+#scene-area::after,
+#sidebar::after,
+#action-area::after,
+#game-log-area::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  border: 1px solid rgba(255,255,255,.06);
+  pointer-events: none;
+}
+
+#scene-area:hover,
+#sidebar:hover,
+#action-area:hover,
+#game-log-area:hover {
+  transform: translateY(-4px) rotateX(.35deg) scale(1.002) !important;
+  border-color: var(--color-border-strong) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.18),
+    inset -1px -1px 0 rgba(0,0,0,.36),
+    0 2px 0 rgba(255,255,255,.05),
+    0 24px 52px rgba(0,0,0,.38),
+    0 0 34px var(--color-shadow-glow) !important;
+}
+
+.modal,
+#explore-panel,
+#save-drawer,
+#test-panel,
+.ending-card,
+.tutorial-tooltip,
+.dice-result-panel {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.1), rgba(0,0,0,.18)),
+    var(--gradient-surface) !important;
+  border: 1px solid var(--color-border-strong) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.16),
+    inset -1px -1px 0 rgba(0,0,0,.36),
+    0 24px 60px rgba(0,0,0,.46),
+    0 0 30px var(--color-accent-alpha) !important;
+}
+
+input,
+textarea,
+select,
+.header-btn,
+.action-btn,
+.save-btn,
+.tutorial-btn,
+.test-apply-btn {
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.12),
+    inset -1px -1px 0 rgba(0,0,0,.32),
+    0 6px 14px rgba(0,0,0,.2);
+}
+
+input,
+textarea,
+select {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.12)),
+    var(--color-bg-elevated);
+}
+
+.header-btn,
+.action-btn,
+.save-btn,
+.tutorial-btn,
+.test-apply-btn {
+  border-color: var(--color-border);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.08), rgba(0,0,0,.16)),
+    var(--color-bg-elevated);
+}
+
+.header-btn:hover,
+.save-btn:hover,
+.tutorial-btn:hover,
+.test-apply-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.18),
+    inset -1px -1px 0 rgba(0,0,0,.3),
+    0 12px 22px rgba(0,0,0,.26),
+    0 0 18px var(--color-accent-alpha);
+}
+
+.header-btn:active,
+.action-btn:active:not(:disabled),
+.save-btn:active,
+.tutorial-btn:active,
+.test-apply-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 2px 2px 5px rgba(0,0,0,.36),
+    inset -1px -1px 0 rgba(255,255,255,.1);
+}
+
+.header-btn.primary,
+.tutorial-btn.next {
+  color: #fff;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.24), rgba(255,255,255,0) 34%),
+    var(--gradient-accent) !important;
+  border-color: color-mix(in srgb, var(--color-accent-light) 60%, transparent);
+}
+
+.mode-card,
+.char-card,
+.stat-cell,
+.skill-tag,
+.inventory-item,
+.save-slot {
+  position: relative;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(0,0,0,.15)),
+    var(--color-bg-elevated);
+  border-color: var(--color-border);
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.1),
+    inset -1px -1px 0 rgba(0,0,0,.3),
+    0 8px 18px rgba(0,0,0,.2);
+}
+
+.mode-card:hover,
+.char-card:hover,
+.save-slot:hover,
+.stat-cell:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.14),
+    inset -1px -1px 0 rgba(0,0,0,.28),
+    0 14px 28px rgba(0,0,0,.26),
+    0 0 18px var(--color-accent-alpha);
+}
+
+.mode-card.selected,
+.char-card.selected {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.12), rgba(0,0,0,.12)),
+    color-mix(in srgb, var(--color-bg-hover) 82%, var(--color-accent) 18%);
+  border-color: var(--color-accent-light);
+}
+
+.stat-bar-track {
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,.45),
+    inset -1px -1px 0 rgba(255,255,255,.08);
+}
+
+.stat-bar-fill.hp {
+  background: linear-gradient(90deg, rgba(224, 82, 82, .18), var(--color-hp, #e05252));
+  box-shadow: 0 0 12px rgba(224, 82, 82, .58);
+}
+
+.stat-bar-fill.san {
+  background: linear-gradient(90deg, rgba(82, 170, 224, .18), var(--color-san, #52aae0));
+  box-shadow: 0 0 12px rgba(82, 170, 224, .58);
+}
+
+.stat-bar-fill.luck {
+  background: linear-gradient(90deg, rgba(224, 196, 82, .18), var(--color-luck, #e0c452));
+  box-shadow: 0 0 12px rgba(224, 196, 82, .52);
+}
+
+.die {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,.22), transparent 28%),
+    var(--gradient-surface);
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,.18),
+    inset -3px -4px 0 rgba(0,0,0,.34),
+    0 16px 28px rgba(0,0,0,.34),
+    0 0 24px var(--color-accent-alpha);
+  transform-style: preserve-3d;
+}
+
+#dice-overlay {
+  background:
+    radial-gradient(ellipse at 50% 40%, var(--color-accent-alpha), transparent 46%),
+    rgba(0,0,0,.74);
+}
+
+.log-entry,
+.explore-item {
+  border-bottom-color: color-mix(in srgb, var(--color-border) 54%, transparent);
+}
+
+[data-theme="hope"] #scene-area,
+[data-theme="hope"] #sidebar,
+[data-theme="hope"] #action-area,
+[data-theme="hope"] #game-log-area,
+[data-theme="hope"] .modal,
+[data-theme="hope"] #explore-panel,
+[data-theme="hope"] #save-drawer,
+[data-theme="hope"] #test-panel,
+[data-theme="hope"] .ending-card,
+[data-theme="hope"] .tutorial-tooltip,
+[data-theme="hope"] .dice-result-panel {
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.86),
+    inset -1px -1px 0 rgba(53,149,211,.12),
+    0 20px 48px rgba(42,112,158,.16),
+    0 0 26px var(--color-accent-alpha) !important;
+}
+
+[data-theme="cyberpunk"] #scene-area::before,
+[data-theme="cyberpunk"] #sidebar::before,
+[data-theme="cyberpunk"] #action-area::before,
+[data-theme="cyberpunk"] #game-log-area::before {
+  opacity: .68;
+}
+
+[data-theme="future"] body::before,
+[data-theme="future"] #scene-area::before,
+[data-theme="future"] #sidebar::before,
+[data-theme="future"] #action-area::before,
+[data-theme="future"] #game-log-area::before {
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+
+  #scene-area:hover,
+  #sidebar:hover,
+  #action-area:hover,
+  #game-log-area:hover,
+  .header-btn:hover,
+  .action-btn:hover,
+  .save-btn:hover,
+  .tutorial-btn:hover,
+  .test-apply-btn:hover,
+  .mode-card:hover,
+  .char-card:hover,
+  .theme-card:hover,
+  .save-slot:hover,
+  .stat-cell:hover {
+    transform: none !important;
+  }
+
+  .bg-orb,
+  #crt-overlay,
+  body::before {
+    opacity: .18 !important;
+  }
+}
+
+html[data-theme] #scene-area,
+html[data-theme] #sidebar,
+html[data-theme] #action-area,
+html[data-theme] #game-log-area {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,0) 28%),
+    linear-gradient(320deg, rgba(0,0,0,.3), rgba(0,0,0,0) 42%),
+    var(--gradient-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.14),
+    inset -1px -1px 0 rgba(0,0,0,.42),
+    0 1px 0 rgba(255,255,255,.06),
+    0 18px 42px rgba(0,0,0,.34),
+    0 0 26px var(--color-accent-alpha) !important;
+}
+
+html[data-theme] #scene-area:hover,
+html[data-theme] #sidebar:hover,
+html[data-theme] #action-area:hover,
+html[data-theme] #game-log-area:hover {
+  border-color: var(--color-border-strong) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,.18),
+    inset -1px -1px 0 rgba(0,0,0,.36),
+    0 2px 0 rgba(255,255,255,.05),
+    0 24px 52px rgba(0,0,0,.38),
+    0 0 34px var(--color-shadow-glow) !important;
+}
+
+/* ===================================================
+   Dynamic Themed Background Fields
+   =================================================== */
+#bg-canvas {
+  z-index: 0;
+  background:
+    var(--motion-layer-c),
+    var(--gradient-bg);
+  opacity: .95;
+}
+
+#bg-canvas::before,
+#bg-canvas::after {
+  content: '';
+  position: absolute;
+  inset: -18%;
+  pointer-events: none;
+  will-change: transform, background-position, opacity;
+}
+
+#bg-canvas::before {
+  background:
+    var(--motion-layer-a),
+    var(--theme-pattern);
+  background-size: 160% 160%, var(--theme-pattern-size);
+  opacity: .78;
+  animation: ambientFieldDrift 18s cubic-bezier(.42, 0, .2, 1) infinite alternate;
+}
+
+#bg-canvas::after {
+  background:
+    var(--motion-layer-b),
+    radial-gradient(ellipse at 50% 50%, transparent 0 42%, rgba(255,255,255,.035) 43%, transparent 52%);
+  background-size: 140% 140%, 100% 100%;
+  opacity: .58;
+  animation: ambientFieldRotate 28s ease-in-out infinite alternate;
+}
+
+.bg-orb {
+  inset: -10%;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0;
+  filter: none;
+  opacity: .45;
+  mix-blend-mode: screen;
+  will-change: transform, background-position, opacity;
+}
+
+.bg-orb-1 {
+  background:
+    linear-gradient(115deg, transparent 0 22%, color-mix(in srgb, var(--theme-swatch-b) 22%, transparent) 34%, transparent 48%),
+    linear-gradient(290deg, transparent 0 48%, color-mix(in srgb, var(--theme-swatch-c) 16%, transparent) 54%, transparent 66%) !important;
+  animation: chromaSweep 16s ease-in-out infinite alternate !important;
+}
+
+.bg-orb-2 {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 34px, color-mix(in srgb, var(--theme-swatch-c) 13%, transparent) 35px 36px, transparent 37px 72px),
+    repeating-linear-gradient(0deg, transparent 0 42px, color-mix(in srgb, var(--theme-swatch-b) 10%, transparent) 43px 44px, transparent 45px 86px) !important;
+  animation: gridCurrent 22s ease-in-out infinite alternate !important;
+}
+
+.bg-orb-3 {
+  background:
+    radial-gradient(ellipse at 18% 28%, color-mix(in srgb, var(--theme-swatch-b) 24%, transparent), transparent 42%),
+    radial-gradient(ellipse at 78% 72%, color-mix(in srgb, var(--theme-swatch-c) 22%, transparent), transparent 46%),
+    radial-gradient(ellipse at 52% 50%, color-mix(in srgb, var(--color-accent-light) 14%, transparent), transparent 52%) !important;
+  animation: depthTide 24s ease-in-out infinite alternate !important;
+}
+
+body::before {
+  background-image:
+    var(--theme-pattern),
+    var(--motion-layer-a),
+    radial-gradient(ellipse at 50% -10%, var(--color-accent-alpha), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 34%, rgba(0,0,0,.22));
+  background-size:
+    var(--theme-pattern-size),
+    140% 140%,
+    auto,
+    auto;
+  animation: backgroundTextureShift 32s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 30%, rgba(255,255,255,.035) 42%, transparent 54%),
+    var(--motion-layer-c);
+  background-size: 180% 180%, 120% 120%;
+  opacity: .48;
+  animation: atmosphericSweep 26s ease-in-out infinite alternate;
+}
+
+[data-theme="cyberpunk"] #bg-canvas::after {
+  animation-name: cyberSignalSplit;
+  opacity: .7;
+}
+
+[data-theme="future"] #bg-canvas::before {
+  animation-name: starChartDrift;
+  opacity: .66;
+}
+
+[data-theme="steampunk"] #bg-canvas::before {
+  animation-name: brassMechanismTurn;
+}
+
+[data-theme="hope"] #bg-canvas,
+[data-theme="hope"] body::after {
+  mix-blend-mode: multiply;
+}
+
+@keyframes ambientFieldDrift {
+  0% { transform: translate3d(-2%, -1%, 0) scale(1); background-position: 0% 0%, 0 0; }
+  50% { transform: translate3d(2%, 1.5%, 0) scale(1.03); background-position: 45% 35%, 20px 12px; }
+  100% { transform: translate3d(4%, -2%, 0) scale(1.06); background-position: 100% 70%, 42px 30px; }
+}
+
+@keyframes ambientFieldRotate {
+  0% { transform: rotate(-2deg) scale(1.05); background-position: 0% 50%, center; }
+  100% { transform: rotate(3deg) scale(1.12); background-position: 100% 45%, center; }
+}
+
+@keyframes chromaSweep {
+  0% { transform: translateX(-4%) skewX(-5deg); opacity: .34; background-position: 0% 30%, 100% 70%; }
+  100% { transform: translateX(4%) skewX(4deg); opacity: .56; background-position: 100% 60%, 0% 30%; }
+}
+
+@keyframes gridCurrent {
+  0% { transform: translate3d(-1%, 0, 0); background-position: 0 0, 0 0; opacity: .24; }
+  100% { transform: translate3d(1%, 0, 0); background-position: 76px 26px, -34px 58px; opacity: .42; }
+}
+
+@keyframes depthTide {
+  0% { transform: scale(1) translate3d(-2%, 1%, 0); opacity: .3; }
+  50% { transform: scale(1.08) translate3d(2%, -1%, 0); opacity: .48; }
+  100% { transform: scale(1.03) translate3d(3%, 2%, 0); opacity: .36; }
+}
+
+@keyframes backgroundTextureShift {
+  0% { background-position: 0 0, 0% 0%, center, center; }
+  100% { background-position: 54px 38px, 100% 70%, center, center; }
+}
+
+@keyframes atmosphericSweep {
+  0% { transform: translateX(-3%) scale(1.02); background-position: 0% 50%, 20% 20%; opacity: .36; }
+  100% { transform: translateX(3%) scale(1.05); background-position: 100% 50%, 80% 70%; opacity: .52; }
+}
+
+@keyframes cyberSignalSplit {
+  0%, 100% { transform: translate3d(-1%, 0, 0) skewX(-1deg); background-position: 0% 0%, center; }
+  35% { transform: translate3d(2%, -1%, 0) skewX(1.5deg); background-position: 70% 35%, center; }
+  37% { transform: translate3d(-2%, 1%, 0) skewX(-2deg); }
+  60% { transform: translate3d(1%, 0, 0) skewX(.5deg); background-position: 100% 80%, center; }
+}
+
+@keyframes starChartDrift {
+  0% { transform: translate3d(-1%, -1%, 0) scale(1.04); background-position: 0% 0%, 0 0; }
+  100% { transform: translate3d(1%, 1%, 0) scale(1.08); background-position: 90% 60%, 58px 58px; }
+}
+
+@keyframes brassMechanismTurn {
+  0% { transform: rotate(0deg) scale(1.04); background-position: 0% 0%, 0 0; }
+  100% { transform: rotate(4deg) scale(1.08); background-position: 80% 50%, 36px 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bg-canvas::before,
+  #bg-canvas::after,
+  .bg-orb,
+  body::before,
+  body::after {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ===================================================
+   Performance-First Static Background Scenes
+   =================================================== */
+#bg-canvas,
+#bg-canvas::before,
+#bg-canvas::after,
+.bg-orb,
+body::before,
+body::after,
+#crt-overlay::after,
+#header::after,
+.glitch-text {
+  animation: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+#bg-canvas {
+  z-index: 0;
+  opacity: .98;
+  background:
+    radial-gradient(ellipse at 12% 18%, color-mix(in srgb, var(--theme-swatch-b) 28%, transparent), transparent 38%),
+    radial-gradient(ellipse at 86% 78%, color-mix(in srgb, var(--theme-swatch-c) 24%, transparent), transparent 42%),
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-swatch-a) 86%, #000 14%), var(--color-bg-base) 50%, var(--color-bg-deep));
+}
+
+#bg-canvas::before,
+#bg-canvas::after {
+  inset: 0;
+  opacity: 1;
+}
+
+#bg-canvas::before {
+  background:
+    var(--theme-pattern),
+    var(--motion-layer-a),
+    linear-gradient(115deg, transparent 0 34%, color-mix(in srgb, var(--theme-swatch-b) 12%, transparent) 42%, transparent 52%);
+  background-size:
+    var(--theme-pattern-size),
+    100% 100%,
+    100% 100%;
+  opacity: .56;
+}
+
+#bg-canvas::after {
+  background:
+    var(--motion-layer-b),
+    var(--motion-layer-c),
+    radial-gradient(ellipse at 50% 115%, rgba(0,0,0,.34), transparent 54%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  opacity: .62;
+}
+
+.bg-orb {
+  inset: 0;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0;
+  filter: none;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+.bg-orb-1 {
+  background:
+    linear-gradient(120deg, transparent 0 24%, color-mix(in srgb, var(--theme-swatch-b) 16%, transparent) 35%, transparent 48%),
+    linear-gradient(300deg, transparent 0 50%, color-mix(in srgb, var(--theme-swatch-c) 12%, transparent) 58%, transparent 72%) !important;
+  opacity: .7;
+}
+
+.bg-orb-2 {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 42px, color-mix(in srgb, var(--theme-swatch-c) 10%, transparent) 43px 44px, transparent 45px 86px),
+    repeating-linear-gradient(0deg, transparent 0 58px, color-mix(in srgb, var(--theme-swatch-b) 8%, transparent) 59px 60px, transparent 61px 118px) !important;
+  opacity: .44;
+}
+
+.bg-orb-3 {
+  background:
+    radial-gradient(ellipse at 24% 72%, color-mix(in srgb, var(--color-accent-light) 18%, transparent), transparent 42%),
+    radial-gradient(ellipse at 74% 26%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 44%) !important;
+  opacity: .62;
+}
+
+body::before {
+  opacity: .44;
+  background-image:
+    var(--theme-pattern),
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 34%, rgba(0,0,0,.2));
+  background-size:
+    var(--theme-pattern-size),
+    auto;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .5;
+  background:
+    linear-gradient(120deg, transparent 0 28%, rgba(255,255,255,.045) 42%, transparent 58%),
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.045), transparent 34%);
+}
+
+#crt-overlay::after {
+  display: none;
+}
+
+#header::after {
+  opacity: .65;
+}
+
+/* Distinct static scene motifs by theme. */
+[data-theme="scifi-horror"] #bg-canvas::after {
+  background:
+    linear-gradient(90deg, rgba(112,228,255,.12) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(141,103,255,.08) 1px, transparent 1px),
+    radial-gradient(ellipse at 72% 24%, rgba(112,228,255,.18), transparent 42%);
+  background-size: 38px 38px, 38px 38px, 100% 100%;
+}
+
+[data-theme="fantasy"] #bg-canvas::after {
+  background:
+    conic-gradient(from 45deg at 50% 50%, transparent 0 12%, rgba(155,216,111,.12) 14% 18%, transparent 20% 58%, rgba(255,179,107,.1) 60% 64%, transparent 66%),
+    radial-gradient(ellipse at 18% 82%, rgba(18,199,176,.22), transparent 44%),
+    radial-gradient(ellipse at 82% 18%, rgba(255,179,107,.18), transparent 42%);
+}
+
+[data-theme="steampunk"] #bg-canvas::after {
+  background:
+    repeating-conic-gradient(from 0deg at 18% 26%, rgba(240,189,115,.14) 0 8deg, transparent 8deg 22deg),
+    radial-gradient(circle at 82% 20%, rgba(95,183,161,.18), transparent 34%),
+    repeating-linear-gradient(90deg, transparent 0 46px, rgba(201,138,53,.1) 47px 49px, transparent 50px 92px);
+}
+
+[data-theme="cyberpunk"] #bg-canvas::after {
+  background:
+    linear-gradient(108deg, transparent 0 34%, rgba(255,59,189,.2) 35% 37%, transparent 38% 55%, rgba(0,231,255,.16) 56% 58%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 14px, rgba(247,255,85,.08) 15px 16px, transparent 17px 31px),
+    radial-gradient(ellipse at 84% 76%, rgba(0,231,255,.22), transparent 44%);
+}
+
+[data-theme="future"] #bg-canvas::after {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(134,169,255,.36) 0 1px, transparent 2px),
+    linear-gradient(116deg, transparent 0 47%, rgba(255,255,255,.14) 48% 49%, transparent 50%);
+  background-size: 62px 62px, 78px 78px, 100% 100%;
+}
+
+[data-theme="abyss"] #bg-canvas::after {
+  background:
+    radial-gradient(ellipse at 30% 82%, rgba(10,169,118,.24), transparent 46%),
+    radial-gradient(ellipse at 74% 20%, rgba(157,108,255,.24), transparent 42%),
+    conic-gradient(from 90deg at 50% 55%, transparent 0 25%, rgba(31,210,192,.1) 28% 34%, transparent 38% 100%);
+}
+
+[data-theme="hope"] #bg-canvas::after {
+  background:
+    radial-gradient(ellipse at 24% 18%, rgba(156,219,255,.34), transparent 44%),
+    radial-gradient(ellipse at 80% 76%, rgba(255,185,143,.26), transparent 42%),
+    linear-gradient(115deg, transparent 0 36%, rgba(74,169,232,.12) 40% 42%, transparent 46%);
+}
+
+[data-theme="classical"] #bg-canvas::after {
+  background:
+    linear-gradient(45deg, rgba(220,192,112,.1) 12.5%, transparent 12.5% 50%, rgba(138,160,109,.09) 50% 62.5%, transparent 62.5%),
+    radial-gradient(ellipse at 16% 20%, rgba(166,132,61,.24), transparent 42%),
+    radial-gradient(ellipse at 84% 78%, rgba(44,16,23,.24), transparent 45%);
+  background-size: 44px 44px, 100% 100%, 100% 100%;
+}
+
+[data-theme="epic"] #bg-canvas::after {
+  background:
+    conic-gradient(from 45deg at 50% 40%, transparent 0 10%, rgba(255,225,146,.16) 11% 15%, transparent 16% 34%, rgba(99,123,255,.12) 35% 39%, transparent 40%),
+    radial-gradient(ellipse at 22% 18%, rgba(224,182,80,.28), transparent 42%),
+    radial-gradient(ellipse at 78% 80%, rgba(214,70,84,.16), transparent 45%);
+}
+
+[data-theme="mythology"] #bg-canvas::after {
+  background:
+    conic-gradient(from 180deg at 50% 45%, transparent 0 18%, rgba(217,72,72,.2) 19% 23%, transparent 24% 58%, rgba(52,195,154,.13) 59% 63%, transparent 64%),
+    repeating-linear-gradient(135deg, transparent 0 30px, rgba(255,158,110,.09) 31px 32px, transparent 33px 60px),
+    radial-gradient(ellipse at 82% 78%, rgba(52,195,154,.2), transparent 44%);
+}
+
+/* ===================================================
+   Rich Static Background Details
+   =================================================== */
+#bg-canvas {
+  background:
+    radial-gradient(ellipse at 10% 12%, color-mix(in srgb, var(--theme-swatch-b) 30%, transparent), transparent 34%),
+    radial-gradient(ellipse at 92% 16%, color-mix(in srgb, var(--theme-swatch-c) 18%, transparent), transparent 32%),
+    radial-gradient(ellipse at 72% 92%, color-mix(in srgb, var(--color-accent-light) 18%, transparent), transparent 38%),
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-swatch-a) 88%, #000 12%), var(--color-bg-base) 48%, var(--color-bg-deep));
+}
+
+#bg-canvas::before {
+  background:
+    var(--theme-pattern),
+    linear-gradient(90deg, color-mix(in srgb, var(--theme-swatch-b) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--theme-swatch-c) 10%, transparent) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 105%, rgba(0,0,0,.42), transparent 52%),
+    linear-gradient(115deg, transparent 0 32%, color-mix(in srgb, var(--theme-swatch-b) 12%, transparent) 42%, transparent 54%);
+  background-size:
+    var(--theme-pattern-size),
+    96px 96px,
+    96px 96px,
+    100% 100%,
+    100% 100%;
+  opacity: .72;
+}
+
+body::after {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% -10%, rgba(255,255,255,.08), transparent 34%),
+    radial-gradient(ellipse at 50% 108%, rgba(0,0,0,.36), transparent 48%),
+    linear-gradient(120deg, transparent 0 28%, rgba(255,255,255,.04) 42%, transparent 58%);
+  background-size: 160px 160px, 160px 160px, 100% 100%, 100% 100%, 100% 100%;
+  opacity: .46;
+}
+
+.bg-orb-1,
+.bg-orb-2,
+.bg-orb-3 {
+  animation: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.bg-orb-1 {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--theme-swatch-b) 18%, transparent) 0 1px, transparent 1px 100%),
+    linear-gradient(0deg, color-mix(in srgb, var(--theme-swatch-c) 12%, transparent) 0 1px, transparent 1px 100%),
+    radial-gradient(ellipse at 5% 50%, color-mix(in srgb, var(--theme-swatch-b) 22%, transparent), transparent 44%),
+    radial-gradient(ellipse at 95% 50%, color-mix(in srgb, var(--theme-swatch-c) 18%, transparent), transparent 44%) !important;
+  background-size: 220px 220px, 220px 220px, 100% 100%, 100% 100% !important;
+  opacity: .46;
+}
+
+.bg-orb-2 {
+  background:
+    linear-gradient(135deg, transparent 0 46%, color-mix(in srgb, var(--theme-swatch-c) 14%, transparent) 47% 48%, transparent 49%),
+    linear-gradient(45deg, transparent 0 48%, color-mix(in srgb, var(--theme-swatch-b) 10%, transparent) 49% 50%, transparent 51%),
+    radial-gradient(ellipse at 28% 22%, color-mix(in srgb, var(--color-accent-light) 16%, transparent), transparent 32%),
+    radial-gradient(ellipse at 70% 78%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 36%) !important;
+  background-size: 180px 180px, 180px 180px, 100% 100%, 100% 100% !important;
+  opacity: .5;
+}
+
+.bg-orb-3 {
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--theme-swatch-c) 24%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 32%, color-mix(in srgb, var(--theme-swatch-b) 18%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 76%, color-mix(in srgb, var(--color-accent-light) 18%, transparent) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--theme-swatch-b) 12%, transparent), transparent 55%) !important;
+  background-size: 92px 92px, 126px 126px, 160px 160px, 100% 100% !important;
+  opacity: .56;
+}
+
+[data-theme="scifi-horror"] .bg-orb-1 {
+  background:
+    linear-gradient(90deg, rgba(112,228,255,.16) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(141,103,255,.1) 1px, transparent 1px),
+    linear-gradient(115deg, transparent 0 42%, rgba(112,228,255,.16) 43% 44%, transparent 45%),
+    radial-gradient(ellipse at 78% 22%, rgba(141,103,255,.18), transparent 36%) !important;
+  background-size: 46px 46px, 46px 46px, 100% 100%, 100% 100% !important;
+}
+
+[data-theme="scifi-horror"] .bg-orb-2 {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 70px, rgba(112,228,255,.12) 71px 72px, transparent 73px 140px),
+    repeating-linear-gradient(0deg, transparent 0 70px, rgba(36,91,255,.1) 71px 72px, transparent 73px 140px),
+    radial-gradient(circle at 18% 78%, rgba(112,228,255,.16) 0 2px, transparent 3px) !important;
+  background-size: 100% 100%, 100% 100%, 64px 64px !important;
+}
+
+[data-theme="fantasy"] .bg-orb-1 {
+  background:
+    conic-gradient(from 45deg at 18% 76%, transparent 0 12%, rgba(255,179,107,.16) 14% 18%, transparent 20%),
+    conic-gradient(from 225deg at 82% 24%, transparent 0 12%, rgba(155,216,111,.14) 14% 18%, transparent 20%),
+    radial-gradient(ellipse at 50% 50%, rgba(18,199,176,.16), transparent 58%) !important;
+}
+
+[data-theme="fantasy"] .bg-orb-2 {
+  background:
+    radial-gradient(circle at 22% 28%, rgba(255,179,107,.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 70%, rgba(155,216,111,.16) 0 2px, transparent 3px),
+    linear-gradient(135deg, transparent 0 47%, rgba(18,199,176,.12) 48% 49%, transparent 50%) !important;
+  background-size: 74px 74px, 108px 108px, 100% 100% !important;
+}
+
+[data-theme="steampunk"] .bg-orb-1 {
+  background:
+    repeating-conic-gradient(from 0deg at 14% 22%, rgba(240,189,115,.2) 0 7deg, transparent 7deg 18deg),
+    repeating-conic-gradient(from 10deg at 82% 74%, rgba(95,183,161,.12) 0 7deg, transparent 7deg 20deg),
+    repeating-linear-gradient(90deg, transparent 0 54px, rgba(201,138,53,.13) 55px 57px, transparent 58px 108px) !important;
+}
+
+[data-theme="steampunk"] .bg-orb-2 {
+  background:
+    radial-gradient(circle at 16px 16px, rgba(240,189,115,.22) 0 2px, transparent 3px),
+    linear-gradient(90deg, transparent 0 48%, rgba(95,183,161,.1) 49% 50%, transparent 51%) !important;
+  background-size: 48px 48px, 100% 100% !important;
+}
+
+[data-theme="cyberpunk"] .bg-orb-1 {
+  background:
+    linear-gradient(104deg, transparent 0 24%, rgba(255,59,189,.22) 25% 27%, transparent 28% 52%, rgba(0,231,255,.18) 53% 55%, transparent 56%),
+    repeating-linear-gradient(0deg, transparent 0 16px, rgba(247,255,85,.08) 17px 18px, transparent 19px 34px) !important;
+}
+
+[data-theme="cyberpunk"] .bg-orb-2 {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,59,189,.24) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 74%, rgba(0,231,255,.22) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(255,59,189,.12) 0 1px, transparent 1px) !important;
+  background-size: 86px 86px, 120px 120px, 54px 54px !important;
+}
+
+[data-theme="future"] .bg-orb-1 {
+  background:
+    radial-gradient(circle at 16% 20%, rgba(255,255,255,.65) 0 1px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(134,169,255,.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 82%, rgba(111,245,255,.34) 0 1px, transparent 2px) !important;
+  background-size: 54px 54px, 86px 86px, 124px 124px !important;
+}
+
+[data-theme="future"] .bg-orb-2 {
+  background:
+    linear-gradient(115deg, transparent 0 44%, rgba(255,255,255,.16) 45% 46%, transparent 47%),
+    linear-gradient(25deg, transparent 0 52%, rgba(134,169,255,.12) 53% 54%, transparent 55%) !important;
+}
+
+[data-theme="abyss"] .bg-orb-1 {
+  background:
+    radial-gradient(ellipse at 18% 80%, rgba(10,169,118,.24), transparent 44%),
+    radial-gradient(ellipse at 74% 20%, rgba(157,108,255,.24), transparent 42%),
+    conic-gradient(from 90deg at 50% 55%, transparent 0 20%, rgba(31,210,192,.12) 24% 30%, transparent 34%) !important;
+}
+
+[data-theme="abyss"] .bg-orb-2 {
+  background:
+    linear-gradient(140deg, transparent 0 40%, rgba(157,108,255,.14) 41% 42%, transparent 43%),
+    radial-gradient(circle at 24% 24%, rgba(31,210,192,.14) 0 2px, transparent 3px) !important;
+  background-size: 100% 100%, 78px 78px !important;
+}
+
+[data-theme="hope"] .bg-orb-1 {
+  background:
+    radial-gradient(ellipse at 22% 18%, rgba(156,219,255,.34), transparent 42%),
+    radial-gradient(ellipse at 80% 74%, rgba(255,185,143,.28), transparent 40%),
+    linear-gradient(115deg, transparent 0 38%, rgba(74,169,232,.12) 40% 42%, transparent 44%) !important;
+}
+
+[data-theme="hope"] .bg-orb-2 {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255,255,255,.86) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 64%, rgba(74,169,232,.16) 0 2px, transparent 3px) !important;
+  background-size: 92px 92px, 132px 132px !important;
+}
+
+[data-theme="classical"] .bg-orb-1 {
+  background:
+    linear-gradient(45deg, rgba(220,192,112,.13) 12.5%, transparent 12.5% 50%, rgba(138,160,109,.11) 50% 62.5%, transparent 62.5%),
+    radial-gradient(ellipse at 16% 20%, rgba(166,132,61,.24), transparent 42%),
+    radial-gradient(ellipse at 84% 78%, rgba(44,16,23,.24), transparent 45%) !important;
+  background-size: 44px 44px, 100% 100%, 100% 100% !important;
+}
+
+[data-theme="classical"] .bg-orb-2 {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 60px, rgba(220,192,112,.1) 61px 62px, transparent 63px 120px),
+    repeating-linear-gradient(0deg, transparent 0 90px, rgba(138,160,109,.08) 91px 92px, transparent 93px 180px) !important;
+}
+
+[data-theme="epic"] .bg-orb-1 {
+  background:
+    conic-gradient(from 45deg at 50% 40%, transparent 0 10%, rgba(255,225,146,.2) 11% 15%, transparent 16% 34%, rgba(99,123,255,.13) 35% 39%, transparent 40%),
+    radial-gradient(ellipse at 22% 18%, rgba(224,182,80,.28), transparent 42%),
+    radial-gradient(ellipse at 78% 80%, rgba(214,70,84,.18), transparent 45%) !important;
+}
+
+[data-theme="epic"] .bg-orb-2 {
+  background:
+    linear-gradient(100deg, transparent 0 44%, rgba(99,123,255,.14) 45% 46%, transparent 47%),
+    radial-gradient(circle at 50% 18%, rgba(255,225,146,.22) 0 2px, transparent 3px) !important;
+  background-size: 100% 100%, 76px 76px !important;
+}
+
+[data-theme="mythology"] .bg-orb-1 {
+  background:
+    conic-gradient(from 180deg at 50% 45%, transparent 0 18%, rgba(217,72,72,.24) 19% 23%, transparent 24% 58%, rgba(52,195,154,.16) 59% 63%, transparent 64%),
+    radial-gradient(ellipse at 82% 78%, rgba(52,195,154,.22), transparent 44%),
+    radial-gradient(ellipse at 18% 18%, rgba(255,158,110,.2), transparent 42%) !important;
+}
+
+[data-theme="mythology"] .bg-orb-2 {
+  background:
+    repeating-linear-gradient(135deg, transparent 0 30px, rgba(255,158,110,.1) 31px 32px, transparent 33px 60px),
+    radial-gradient(circle at 26% 34%, rgba(217,72,72,.18) 0 2px, transparent 3px) !important;
+  background-size: 100% 100%, 84px 84px !important;
+}

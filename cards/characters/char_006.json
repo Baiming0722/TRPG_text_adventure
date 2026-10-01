@@ -1,0 +1,23 @@
+{
+  "id": "char_006",
+  "name": "陳宇",
+  "class": "軟體工程師",
+  "age": 28,
+  "gender": "男",
+  "personality": "理性、內向",
+  "wealth": "中產",
+  "background": "科技公司的資深工程師，整天面對電腦螢幕。雖然體能較弱，但擁有極高的邏輯思維與資訊處理能力。",
+  "stats": { "STR": 30, "DEX": 45, "INT": 75, "POW": 50, "MOV": 40 },
+  "derived_stats": { "HP": 70, "SAN": 50, "LUCK": 55 },
+  "skills": [
+    { "id": "skill_computer", "name": "電腦使用", "bonus": 4, "type": "INT" },
+    { "id": "skill_research", "name": "搜尋資料", "bonus": 3, "type": "INT" },
+    { "id": "skill_focus", "name": "專注力", "bonus": 2, "type": "POW" }
+  ],
+  "inventory": [
+    { "item": "高階筆電", "quantity": 1 },
+    { "item": "黑咖啡", "quantity": 2 }
+  ],
+  "status_effects": [],
+  "temp_modifiers": []
+}

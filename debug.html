@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>TRPG Debug 監控儀表板</title>
+  <link rel="stylesheet" href="./css/debug.css">
+</head>
+<body>
+<div id="debug-app">
+
+  <header id="debug-header">
+    <h1>🔧 TRPG Debug 監控儀表板</h1>
+    <span class="debug-status live">● 即時更新</span>
+    <div id="debug-controls">
+      <button class="dbg-btn" id="btn-pause">⏸ 暫停更新</button>
+      <button class="dbg-btn" id="btn-export">📥 匯出狀態</button>
+      <a href="index.html" class="dbg-btn" target="_blank">🎮 開啟遊戲</a>
+    </div>
+  </header>
+
+  <nav id="debug-tabs">
+    <button class="tab-btn active" data-tab="map">🗺 地圖進度</button>
+    <button class="tab-btn" data-tab="story">📖 劇情進度</button>
+    <button class="tab-btn" data-tab="char">👤 角色數值</button>
+    <button class="tab-btn" data-tab="prompt">💬 LLM Prompt</button>
+    <button class="tab-btn" data-tab="dice">🎲 骰子紀錄</button>
+    <button class="tab-btn" data-tab="events">📌 事件紀錄</button>
+  </nav>
+
+  <div id="debug-content">
+    <div id="tab-map"    class="tab-panel active"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+    <div id="tab-story"  class="tab-panel"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+    <div id="tab-char"   class="tab-panel"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+    <div id="tab-prompt" class="tab-panel"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+    <div id="tab-dice"   class="tab-panel"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+    <div id="tab-events" class="tab-panel"><div style="color:var(--muted)">等待遊戲資料...</div></div>
+  </div>
+
+</div>
+<script src="./debug_monitor/debug-monitor.js"></script>
+</body>
+</html>

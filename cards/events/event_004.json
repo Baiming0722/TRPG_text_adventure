@@ -1,0 +1,15 @@
+{
+  "id": "event_005",
+  "title": "染血的日記",
+  "description": "玩家在某個房間發現生還者留下的線索",
+  "trigger_condition": null,
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "found_survivor_diary",
+      "value": true,
+      "description": "找到生還者日記"
+    }
+  ],
+  "narrative": "在一間門半掩著的寢室裡，你發現了一本沾滿血跡的日記本。上面潦草地寫著：『他們失控了...深淵計畫根本是個騙局...我們不該把那東西挖出來...電梯密碼被主管改成了 0451...希望能有人看到這個...』"
+}

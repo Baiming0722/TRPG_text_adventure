@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="scifi-horror">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>命運回廊 — TRPG 文字冒險遊戲</title>
+  <meta name="description" content="以 AI 擔任 GM 的 TRPG 文字冒險遊戲。在瀏覽器中體驗完整的角色扮演流程，包含場景描述、骰子判定、戰鬥與劇情推進。">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/effects.css">
+  <!-- marked.js CDN (Markdown 渲染) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<!-- ===== 動態背景光球 ===== -->
+<div id="bg-canvas" aria-hidden="true">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<!-- ===== CRT 掃描線覆蓋層 ===== -->
+<div id="crt-overlay" aria-hidden="true"></div>
+
+<div id="app">
+
+  <!-- ===== 頂部標題列 ===== -->
+  <header id="header" class="entrance-anim">
+    <div class="game-title glitch-text">
+      <!-- 煉金術瓶 SVG 圖示 -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;opacity:.85" aria-hidden="true">
+        <path d="M9 3h6v3l3 9a4 4 0 0 1-3.87 5H9.87A4 4 0 0 1 6 15l3-9V3z"/>
+        <line x1="6" y1="9" x2="18" y2="9"/>
+      </svg>
+      命運回廊
+    </div>
+    <div style="font-size:.75rem;color:var(--color-text-muted);letter-spacing:.08em;font-weight:500">TRPG 文字冒險</div>
+
+    <div class="header-right">
+      <select id="theme-select" title="色彩主題" style="font-size:.78rem;padding:4px 10px;border-radius:6px;cursor:pointer">
+        <option value="scifi-horror">科幻</option>
+        <option value="fantasy">冒險</option>
+        <option value="steampunk">蒸氣</option>
+        <option value="cyberpunk">賽博</option>
+        <option value="future">星際</option>
+        <option value="abyss">深淵</option>
+        <option value="hope">黎明</option>
+        <option value="classical">古典</option>
+        <option value="epic">史詩</option>
+        <option value="mythology">神話</option>
+      </select>
+
+      <!-- 字體選擇 -->
+      <select id="font-select" title="字體選擇" style="font-size:.78rem;padding:4px 10px;border-radius:6px;cursor:pointer">
+        <option value="default">預設 (黑體)</option>
+        <option value="serif">明體</option>
+        <option value="mono">等寬</option>
+        <option value="load-local" style="color:var(--color-text-accent);font-weight:bold">＋ 載入系統字體</option>
+      </select>
+
+      <!-- 音訊切換按鈕 -->
+      <button class="header-btn icon-only" id="btn-audio-toggle" title="切換音訊" aria-label="切換音訊" aria-pressed="false" data-audio-control="true">
+        <svg class="audio-icon-on" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+        <svg class="audio-icon-off" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <line x1="23" y1="9" x2="17" y2="15"/>
+          <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+        <span class="audio-label">音訊</span>
+      </button>
+
+      <!-- 探索紀錄按鈕 -->
+      <button class="header-btn" id="btn-explore" title="探索紀錄">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+        </svg>
+        探索
+      </button>
+
+      <!-- 設定按鈕 -->
+      <button class="header-btn" id="btn-settings" title="設定 API Key">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        設定
+      </button>
+
+      <!-- 存檔按鈕 -->
+      <button class="header-btn primary" id="btn-save-drawer" title="存檔/讀檔">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+        存檔
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== 主要內容區 ===== -->
+  <main id="main-content">
+    <!-- 遊戲紀錄（左側欄） -->
+    <aside id="game-log-area" class="entrance-anim entrance-anim-delay-1"></aside>
+
+    <!-- 場景描述區域 -->
+    <section id="scene-area" class="entrance-anim entrance-anim-delay-2">
+      <div id="scene-display">
+        <div class="scene-loading">
+          <span>等待開始新遊戲...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 行動選項區 -->
+    <section id="action-area">
+      <div id="action-buttons"></div>
+    </section>
+
+    <!-- 右側欄：角色面板 + 地圖 -->
+    <aside id="sidebar" class="entrance-anim entrance-anim-delay-3">
+      <div id="character-panel">
+        <div class="panel-section-title">角色資訊</div>
+        <div class="text-muted text-sm">尚未選擇角色</div>
+      </div>
+      <div id="map-view">
+        <div class="panel-section-title">地圖</div>
+        <canvas id="map-canvas"></canvas>
+      </div>
+    </aside>
+
+  </main>
+
+</div><!-- #app -->
+
+<!-- ===== 存檔抽屜 ===== -->
+<aside id="save-drawer">
+  <div class="drawer-header">
+    <div class="drawer-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px" aria-hidden="true">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+        <polyline points="17 21 17 13 7 13 7 21"/>
+        <polyline points="7 3 7 8 15 8"/>
+      </svg>
+      存檔管理
+    </div>
+    <button class="drawer-close-btn" title="關閉" aria-label="關閉存檔管理">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="drawer-body"></div>
+</aside>
+
+<!-- ===== 探索紀錄面板 ===== -->
+<aside id="explore-panel">
+  <div class="drawer-header">
+    <div class="drawer-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px" aria-hidden="true">
+        <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+      </svg>
+      探索紀錄
+    </div>
+    <button class="drawer-close-btn" title="關閉" aria-label="關閉探索紀錄">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="explore-body" style="flex:1;overflow-y:auto"></div>
+</aside>
+
+<!-- ===== 測試模式面板 ===== -->
+<div id="test-panel"></div>
+
+<!-- ===== 骰子動畫 Overlay ===== -->
+<div id="dice-overlay" class="hidden"></div>
+
+<!-- ===== 載入中指示器 ===== -->
+<div id="loading-indicator" class="hidden">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">AI 正在思考中...</div>
+</div>
+
+<!-- ===== Toast 通知容器 ===== -->
+<div id="toast-container"></div>
+
+<!-- ===== 結局畫面 ===== -->
+<div id="ending-screen" class="hidden">
+  <div class="ending-card">
+    <div class="ending-icon">🎭</div>
+    <div class="ending-type"></div>
+    <div class="ending-message"></div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="header-btn primary" onclick="location.reload()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        重新開始
+      </button>
+      <button class="header-btn" id="btn-save-ending">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+        </svg>
+        儲存進度
+      </button>
+      <button class="header-btn" onclick="document.getElementById('ending-screen').classList.add('hidden')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        關閉
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 設定 Modal ===== -->
+<div id="settings-modal" class="overlay-backdrop hidden">
+  <div class="modal">
+    <div class="modal-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:8px" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      設定
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">LLM 提供者</div>
+      <select id="settings-provider" class="settings-select">
+        <option value="deepseek">DeepSeek</option>
+        <option value="nvidia">NVIDIA NIM</option>
+        <option value="ollama">Ollama</option>
+        <option value="openrouter">OpenRouter</option>
+      </select>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">URL</div>
+      <input type="text" id="settings-url" class="settings-input" style="width:100%;box-sizing:border-box;" disabled>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">API Key</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="password" id="settings-api-key" class="settings-input" placeholder="請輸入 API Key..." style="flex:1">
+        <button class="header-btn" id="btn-fetch-models" title="取得可用模型清單" style="white-space:nowrap;flex-shrink:0">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          取得模型
+        </button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">模型</div>
+      <input type="text" id="settings-model-search" class="settings-input" placeholder="🔍 輸入關鍵字篩選模型..." style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+      <select id="settings-model" class="settings-select" style="width:100%;box-sizing:border-box;">
+        <option value="">請先輸入 API Key 並點擊「取得模型」</option>
+      </select>
+      <div id="model-details-card" class="hidden" style="margin-top:8px;padding:12px;border-radius:var(--radius-md);background:var(--color-bg-deep);border:1px solid var(--color-border);font-family:var(--font-ui);line-height:1.5;"></div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">創意度（Temperature）：<span id="temp-display">0.7</span></div>
+      <input type="range" id="settings-temperature" min="0" max="1" step="0.05" value="0.7"
+        oninput="document.getElementById('temp-display').textContent=this.value"
+        style="width:100%">
+    </div>
+    <div class="settings-section-title">音訊</div>
+    <div class="settings-row audio-settings-row">
+      <label class="audio-toggle-row">
+        <input type="checkbox" id="settings-audio-muted">
+        <span>靜音</span>
+      </label>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">BGM 音量：<span id="bgm-volume-display">35%</span></div>
+      <input type="range" id="settings-bgm-volume" min="0" max="1" step="0.05" value="0.35" style="width:100%">
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">音效音量：<span id="sfx-volume-display">65%</span></div>
+      <input type="range" id="settings-sfx-volume" min="0" max="1" step="0.05" value="0.65" style="width:100%">
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">BGM 模式</div>
+      <select id="settings-bgm-mode" class="settings-select">
+        <option value="follow-theme">跟隨主題</option>
+        <option value="manual">手動選擇</option>
+      </select>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">BGM 風格</div>
+      <select id="settings-bgm-style" class="settings-select"></select>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:24px">
+      <button class="header-btn" onclick="document.getElementById('settings-modal').classList.add('hidden')">取消</button>
+      <button class="header-btn primary" id="btn-save-settings">儲存</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./js/app.js?v=1.0.2"></script>
+</body>
+</html>

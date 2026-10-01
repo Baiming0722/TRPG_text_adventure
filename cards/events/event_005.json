@@ -1,0 +1,15 @@
+{
+  "id": "event_006",
+  "title": "啟動電梯",
+  "description": "玩家輸入密碼解鎖電梯",
+  "trigger_condition": { "flag": "found_survivor_diary" },
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "unlocked_elevator",
+      "value": true,
+      "description": "解鎖通往上層的電梯"
+    }
+  ],
+  "narrative": "你來到走廊盡頭的電梯前，將日記本上記載的密碼 0451 輸入終端機。螢幕亮起綠光，沉重的電梯門緩緩打開，這將是你前往管理層的唯一途徑。"
+}

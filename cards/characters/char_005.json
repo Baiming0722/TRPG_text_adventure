@@ -1,0 +1,12 @@
+{
+  "id": "char_005", "name": "王明", "class": "普通人",
+  "background": "超商收銀員，過著平凡的日常生活。雖然沒有特殊技能，但天生好運加上求生本能，往往能在危機中找到出路。",
+  "stats": { "STR": 45, "DEX": 45, "INT": 45, "POW": 45, "MOV": 50 },
+  "derived_stats": { "HP": 100, "SAN": 55, "LUCK": 75 },
+  "skills": [
+    { "id": "skill_rest", "name": "休息恢復", "bonus": 2, "type": "HP" },
+    { "id": "skill_pray", "name": "好運直覺", "bonus": 2, "type": "LUCK" },
+    { "id": "skill_adapt", "name": "快速適應", "bonus": 2, "type": "DEX" }
+  ],
+  "inventory": [], "status_effects": [], "temp_modifiers": []
+}

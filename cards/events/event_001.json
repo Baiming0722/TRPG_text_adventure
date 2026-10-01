@@ -1,0 +1,15 @@
+{
+  "id": "event_001",
+  "title": "甦醒",
+  "description": "玩家在實驗室中醒來",
+  "trigger_condition": null,
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "game_started",
+      "value": true,
+      "description": "遊戲正式開始"
+    }
+  ],
+  "narrative": "你緩緩睜開雙眼，第一眼看到的是刺眼的白色天花板。監測儀器發出規律的嗶嗶聲，你試著起身，頭部傳來陣陣劇痛。環顧四周，你確認自己身處在某種醫療設施中，但這裡空無一人。"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "map_001",
+  "name": "B2 地下實驗區",
+  "description": "一個隱藏在地下二樓的秘密研究設施，由多個功能不同的實驗室和走廊組成。",
+  "nodes": [
+    {
+      "id": "node_001",
+      "name": "甦醒房間",
+      "description": "一間充滿醫療儀器的白色房間。你躺在一張金屬床上，周圍有各種監測設備。房間的一扇門通向走廊，另一扇門通向儲藏室。",
+      "events": ["event_001"],
+      "connections": ["node_002", "node_003"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_002",
+      "name": "B2 走廊",
+      "description": "昏暗的走廊，牆上有乾涸的血跡。走廊盡頭的燈在閃爍，偶爾傳來不明的聲響。",
+      "events": ["event_002"],
+      "connections": ["node_001", "node_004"],
+      "entry_condition": {
+        "flag": "door_unlocked",
+        "fail_message": "走廊的門被鎖住了，需要找到開門的方法。"
+      },
+      "explored": false,
+      "locked": true
+    },
+    {
+      "id": "node_003",
+      "name": "儲藏室",
+      "description": "堆滿雜物的儲藏室，有各種研究設備和文件箱。角落裡有一個電子門鎖控制面板。",
+      "events": [],
+      "connections": ["node_001"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_004",
+      "name": "核心研究室",
+      "description": "這裡是整個設施的核心。多台電腦螢幕顯示著複雜的實驗數據，中央有一個密封的玻璃容器。房間的角落有一個保險箱。",
+      "events": ["event_special_001"],
+      "connections": ["node_002", "node_005"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_005",
+      "name": "緊急出口",
+      "description": "一扇厚重的鋼製緊急出口。門上有電子鎖，需要特殊的識別卡才能開啟。門的另一側似乎就是通往地面的樓梯。",
+      "events": [],
+      "connections": ["node_004"],
+      "entry_condition": {
+        "flag": "found_key_card",
+        "fail_message": "緊急出口的電子鎖閃著紅燈。你需要找到識別卡才能開啟。"
+      },
+      "explored": false,
+      "locked": true
+    }
+  ]
+}

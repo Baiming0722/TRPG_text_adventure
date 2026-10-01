@@ -1,0 +1,17 @@
+{
+  "id": "scenario_001",
+  "title": "序章：甦醒",
+  "chapter": 1,
+  "description": "你在一間昏暗的實驗室中醒來，周圍充斥著各種儀器的嗡嗡聲。你完全不記得自己是如何來到這裡的，也不知道這裡是哪裡。牆壁上的螢幕閃爍著不明的數據，空氣中有股刺鼻的消毒藥水味。你必須弄清楚這裡發生了什麼，並找到出口。",
+  "worldview": "這是一個現代科幻世界。某間神秘的生物科技公司在地下設有秘密研究設施，進行著不為人知的實驗。你是某種實驗的受試者，或者是被誤困在此的無辜者——真相有待揭露。",
+  "entry_condition": null,
+  "exit_conditions": {
+    "success": { "flag": "found_key_card", "current_node": "node_005" },
+    "failure": { "hp_lte": 0 },
+    "normal": { "flag": "left_without_clue" },
+    "open": { "flag": "ally_survived" }
+  },
+  "key_events": ["event_001", "event_002", "event_special_001"],
+  "available_map": "map_001",
+  "starting_node": "node_001"
+}

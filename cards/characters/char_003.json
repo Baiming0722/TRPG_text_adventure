@@ -1,0 +1,12 @@
+{
+  "id": "char_003", "name": "老李", "class": "工人",
+  "background": "建築工地的老師傅，有著二十年的工作經驗。體格壯碩，動手能力強，對複雜設備有直覺性的理解。",
+  "stats": { "STR": 70, "DEX": 40, "INT": 40, "POW": 50, "MOV": 45 },
+  "derived_stats": { "HP": 120, "SAN": 50, "LUCK": 50 },
+  "skills": [
+    { "id": "skill_fight", "name": "搏擊", "bonus": 3, "type": "STR" },
+    { "id": "skill_repair", "name": "機械維修", "bonus": 2, "type": "INT" },
+    { "id": "skill_endure", "name": "忍耐力", "bonus": 2, "type": "STR" }
+  ],
+  "inventory": [], "status_effects": [], "temp_modifiers": []
+}

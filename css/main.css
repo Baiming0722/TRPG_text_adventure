@@ -1,0 +1,1431 @@
+/* css/main.css - 全域設計系統：CSS Custom Properties、重置、佈局 */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;700&display=swap');
+
+/* ===================================================
+   設計 Token：CSS Custom Properties
+   =================================================== */
+:root {
+  /* --- 字體 --- */
+  --font-ui: 'Inter', 'Noto Sans TC', sans-serif;
+  --font-narrative: 'Noto Serif TC', 'Noto Sans TC', serif;
+  --font-mono: 'Courier New', monospace;
+
+  /* --- 間距 --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* --- 圓角 --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- 過渡 --- */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* --- 陰影 --- */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.4), 0 2px 6px rgba(0,0,0,.5);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.6);
+  --shadow-glow: 0 0 20px var(--color-accent-alpha);
+
+  /* --- Z-index 層級 --- */
+  --z-base: 0;
+  --z-panel: 10;
+  --z-overlay: 100;
+  --z-drawer: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+  --z-dice: 500;
+}
+
+/* ===================================================
+   主題定義：�[data-theme="scifi-horror"], :root {
+  --color-bg-deep:     #02040b;
+  --color-bg-base:     #050a1b;
+  --color-bg-surface:  #0a122e;
+  --color-bg-elevated: #101c44;
+  --color-bg-hover:    #16275c;
+
+  --color-border:      rgba(30, 64, 175, 0.25);
+  --color-border-strong: rgba(59, 130, 246, 0.65);
+
+  --color-accent:      #1e40af; /* 科幻：深藍色為主 */
+  --color-accent-light:#3b82f6;
+  --color-accent-alpha: rgba(30, 64, 175, 0.35);
+
+  --color-text-primary:   #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted:     #3b82f6;
+  --color-text-accent:    #60a5fa;
+
+  --color-hp:  #e05252;
+  --color-san: #3b82f6;
+  --color-luck:#e0c452;
+
+  --color-success:        #3dd68c;
+  --color-partial-success:#f0a832;
+  --color-failure:        #e05252;
+  --color-critical:       #ff6b35;
+  --color-shadow-glow:    rgba(30, 64, 175, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #010206 0%, #050a1b 50%, #030510 100%);
+  --gradient-accent: linear-gradient(135deg, #1e40af, #3b82f6);
+  --gradient-surface: linear-gradient(180deg, #101c44, #0a122e);
+  --gradient-header: linear-gradient(90deg, rgba(30, 64, 175, 0.3), rgba(59, 130, 246, 0.15), transparent);
+}
+
+[data-theme="fantasy"] {
+  --color-bg-deep:     #010609;
+  --color-bg-base:     #03141a;
+  --color-bg-surface:  #07242e;
+  --color-bg-elevated: #0b3442;
+  --color-bg-hover:    #0e4457;
+
+  --color-border:      rgba(6, 182, 212, 0.25);
+  --color-border-strong: rgba(34, 211, 238, 0.65);
+
+  --color-accent:      #06b6d4; /* 冒險：青色為主 */
+  --color-accent-light:#22d3ee;
+  --color-accent-alpha: rgba(6, 182, 212, 0.35);
+
+  --color-text-primary:   #e0f2fe;
+  --color-text-secondary: #06b6d4;
+  --color-text-muted:     #0891b2;
+  --color-text-accent:    #22d3ee;
+
+  --color-hp:  #e05252;
+  --color-san: #06b6d4;
+  --color-luck:#e0c452;
+
+  --color-success:        #3dd68c;
+  --color-partial-success:#06b6d4;
+  --color-failure:        #e05252;
+  --color-critical:       #ff8040;
+  --color-shadow-glow:    rgba(6, 182, 212, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #010304 0%, #03141a 50%, #01090d 100%);
+  --gradient-accent: linear-gradient(135deg, #06b6d4, #0891b2);
+  --gradient-surface: linear-gradient(180deg, #0b3442, #07242e);
+  --gradient-header: linear-gradient(90deg, rgba(6, 182, 212, 0.25), rgba(34, 211, 238, 0.15), transparent);
+}
+
+[data-theme="steampunk"] {
+  --color-bg-deep:     #080503;
+  --color-bg-base:     #130e09;
+  --color-bg-surface:  #1e160e;
+  --color-bg-elevated: #2b2014;
+  --color-bg-hover:    #3a2b1b;
+
+  --color-border:      rgba(217, 119, 6, 0.25);
+  --color-border-strong: rgba(245, 158, 11, 0.65);
+
+  --color-accent:      #b45309; /* 蒸氣：黃銅色為主 */
+  --color-accent-light:#f59e0b;
+  --color-accent-alpha: rgba(217, 119, 6, 0.35);
+
+  --color-text-primary:   #fef3c7;
+  --color-text-secondary: #d97706;
+  --color-text-muted:     #78350f;
+  --color-text-accent:    #fbbf24;
+
+  --color-hp:  #d04040;
+  --color-san: #d97706;
+  --color-luck:#fbbf24;
+
+  --color-success:        #50a050;
+  --color-partial-success:#d97706;
+  --color-failure:        #d04040;
+  --color-critical:       #e07030;
+  --color-shadow-glow:    rgba(180, 83, 9, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #040201 0%, #130e09 50%, #0a0704 100%);
+  --gradient-accent: linear-gradient(135deg, #d97706, #78350f);
+  --gradient-surface: linear-gradient(180deg, #2b2014, #1e160e);
+  --gradient-header: linear-gradient(90deg, rgba(217, 119, 6, 0.25), rgba(245, 158, 11, 0.15), transparent);
+}
+
+[data-theme="cyberpunk"] {
+  --color-bg-deep:     #000000;
+  --color-bg-base:     #080108;
+  --color-bg-surface:  #12031a;
+  --color-bg-elevated: #1d052b;
+  --color-bg-hover:    #2a073e;
+
+  --color-border:      rgba(255, 0, 127, 0.35);
+  --color-border-strong: rgba(0, 255, 255, 0.85);
+
+  --color-accent:      #ff007f; /* 賽博：亮色、暗色混亂相間 */
+  --color-accent-light:#00ffff;
+  --color-accent-alpha: rgba(255, 0, 127, 0.45);
+
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #00ffff;
+  --color-text-muted:     #881188;
+  --color-text-accent:    #ffff00;
+
+  --color-hp:  #ff007f;
+  --color-san: #00ffff;
+  --color-luck:#ffff00;
+
+  --color-success:        #00ff80;
+  --color-partial-success:#ffff00;
+  --color-failure:        #ff007f;
+  --color-critical:       #ff8000;
+  --color-shadow-glow:    rgba(255, 0, 127, 0.55);
+
+  --gradient-bg: linear-gradient(135deg, #000000 0%, #080108 50%, #000000 100%);
+  --gradient-accent: linear-gradient(135deg, #ff007f, #00ffff);
+  --gradient-surface: linear-gradient(180deg, #1d052b, #12031a);
+  --gradient-header: linear-gradient(90deg, rgba(255, 0, 127, 0.35), rgba(0, 255, 255, 0.25), transparent);
+}
+
+[data-theme="future"] {
+  --color-bg-deep:     #000000;
+  --color-bg-base:     #040404;
+  --color-bg-surface:  #0c0c0c;
+  --color-bg-elevated: #161616;
+  --color-bg-hover:    #242424;
+
+  --color-border:      rgba(255, 255, 255, 0.22);
+  --color-border-strong: rgba(255, 255, 255, 0.95);
+
+  --color-accent:      #ffffff; /* 星際：黑色為主，白色重點 */
+  --color-accent-light:#ffffff;
+  --color-accent-alpha: rgba(255, 255, 255, 0.3);
+
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #e5e7eb;
+  --color-text-muted:     #9ca3af;
+  --color-text-accent:    #ffffff;
+
+  --color-hp:  #ffffff;
+  --color-san: #d1d5db;
+  --color-luck:#ffffff;
+
+  --color-success:        #ffffff;
+  --color-partial-success:#e5e7eb;
+  --color-failure:        #9ca3af;
+  --color-critical:       #ffffff;
+  --color-shadow-glow:    rgba(255, 255, 255, 0.3);
+
+  --gradient-bg: linear-gradient(135deg, #000000 0%, #040404 50%, #000000 100%);
+  --gradient-accent: linear-gradient(135deg, #ffffff, #9ca3af);
+  --gradient-surface: linear-gradient(180deg, #161616, #0c0c0c);
+  --gradient-header: linear-gradient(90deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05), transparent);
+}
+
+[data-theme="abyss"] {
+  --color-bg-deep:     #010503;
+  --color-bg-base:     #030d07;
+  --color-bg-surface:  #0d0514;
+  --color-bg-elevated: #160a21;
+  --color-bg-hover:    #200e2f;
+
+  --color-border:      rgba(16, 185, 129, 0.25);
+  --color-border-strong: rgba(139, 92, 246, 0.65);
+
+  --color-accent:      #8b5cf6; /* 深淵：墨綠色、紫色 */
+  --color-accent-light:#a78bfa;
+  --color-accent-alpha: rgba(139, 92, 246, 0.35);
+
+  --color-text-primary:   #d1fae5;
+  --color-text-secondary: #a78bfa;
+  --color-text-muted:     #059669;
+  --color-text-accent:    #10b981;
+
+  --color-hp:  #8b5cf6;
+  --color-san: #10b981;
+  --color-luck:#a78bfa;
+
+  --color-success:        #10b981;
+  --color-partial-success:#8b5cf6;
+  --color-failure:        #7f1d1d;
+  --color-critical:       #d500f9;
+  --color-shadow-glow:    rgba(139, 92, 246, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #010503 0%, #0d0514 50%, #030d07 100%);
+  --gradient-accent: linear-gradient(135deg, #8b5cf6, #10b981);
+  --gradient-surface: linear-gradient(180deg, #160a21, #0d0514);
+  --gradient-header: linear-gradient(90deg, rgba(139, 92, 246, 0.25), rgba(16, 185, 129, 0.15), transparent);
+}
+
+[data-theme="hope"] {
+  --color-bg-deep:     #e0f2fe;
+  --color-bg-base:     #f0f9ff;
+  --color-bg-surface:  #ffffff;
+  --color-bg-elevated: #e0f2fe;
+  --color-bg-hover:    #bae6fd;
+
+  --color-border:      rgba(14, 165, 233, 0.2);
+  --color-border-strong: rgba(14, 165, 233, 0.6);
+
+  --color-accent:      #0ea5e9; /* 黎明：白色、天藍色 */
+  --color-accent-light:#38bdf8;
+  --color-accent-alpha: rgba(14, 165, 233, 0.25);
+
+  --color-text-primary:   #0f172a;
+  --color-text-secondary: #0284c7;
+  --color-text-muted:     #64748b;
+  --color-text-accent:    #0369a1;
+
+  --color-hp:  #ef4444;
+  --color-san: #0ea5e9;
+  --color-luck:#0284c7;
+
+  --color-success:        #10b981;
+  --color-partial-success:#0ea5e9;
+  --color-failure:        #ef4444;
+  --color-critical:       #ec4899;
+  --color-shadow-glow:    rgba(14, 165, 233, 0.35);
+
+  --gradient-bg: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #e0f2fe 100%);
+  --gradient-accent: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  --gradient-surface: linear-gradient(180deg, #ffffff, #f0f9ff);
+  --gradient-header: linear-gradient(90deg, rgba(14, 165, 233, 0.25), rgba(56, 189, 248, 0.15), transparent);
+}
+
+[data-theme="classical"] {
+  --color-bg-deep:     #080704;
+  --color-bg-base:     #131008;
+  --color-bg-surface:  #1e1a0d;
+  --color-bg-elevated: #2a2512;
+  --color-bg-hover:    #393219;
+
+  --color-border:      rgba(202, 138, 4, 0.25);
+  --color-border-strong: rgba(234, 179, 8, 0.65);
+
+  --color-accent:      #ca8a04; /* 古典：暗黃色 */
+  --color-accent-light:#facc15;
+  --color-accent-alpha: rgba(202, 138, 4, 0.35);
+
+  --color-text-primary:   #fef08a;
+  --color-text-secondary: #ca8a04;
+  --color-text-muted:     #854d0e;
+  --color-text-accent:    #facc15;
+
+  --color-hp:  #ca8a04;
+  --color-san: #854d0e;
+  --color-luck:#facc15;
+
+  --color-success:        #ca8a04;
+  --color-partial-success:#facc15;
+  --color-failure:        #854d0e;
+  --color-critical:       #b45309;
+  --color-shadow-glow:    rgba(202, 138, 4, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #040302 0%, #131008 50%, #0a0804 100%);
+  --gradient-accent: linear-gradient(135deg, #ca8a04, #854d0e);
+  --gradient-surface: linear-gradient(180deg, #2a2512, #1e1a0d);
+  --gradient-header: linear-gradient(90deg, rgba(202, 138, 4, 0.25), rgba(234, 179, 8, 0.15), transparent);
+}
+
+[data-theme="epic"] {
+  --color-bg-deep:     #050401;
+  --color-bg-base:     #110e04;
+  --color-bg-surface:  #1d1806;
+  --color-bg-elevated: #292209;
+  --color-bg-hover:    #382e0d;
+
+  --color-border:      rgba(254, 240, 138, 0.25);
+  --color-border-strong: rgba(253, 224, 71, 0.75);
+
+  --color-accent:      #ffd700; /* 史詩：金色為主 */
+  --color-accent-light:#ffe66d;
+  --color-accent-alpha: rgba(253, 224, 71, 0.45);
+
+  --color-text-primary:   #fef9c3;
+  --color-text-secondary: #ffd700;
+  --color-text-muted:     #b45309;
+  --color-text-accent:    #ffe66d;
+
+  --color-hp:  #ffd700;
+  --color-san: #b45309;
+  --color-luck:#ffe66d;
+
+  --color-success:        #ffd700;
+  --color-partial-success:#ffe66d;
+  --color-failure:        #b45309;
+  --color-critical:       #fef9c3;
+  --color-shadow-glow:    rgba(253, 224, 71, 0.45);
+
+  --gradient-bg: linear-gradient(135deg, #020201 0%, #110e04 50%, #0a0802 100%);
+  --gradient-accent: linear-gradient(135deg, #ffd700, #b45309);
+  --gradient-surface: linear-gradient(180deg, #292209, #1d1806);
+  --gradient-header: linear-gradient(90deg, rgba(253, 224, 71, 0.25), rgba(254, 240, 138, 0.15), transparent);
+}
+
+[data-theme="mythology"] {
+  --color-bg-deep:     #080101;
+  --color-bg-base:     #140303;
+  --color-bg-surface:  #210505;
+  --color-bg-elevated: #300808;
+  --color-bg-hover:    #400b0b;
+
+  --color-border:      rgba(220, 38, 38, 0.25);
+  --color-border-strong: rgba(239, 68, 68, 0.7);
+
+  --color-accent:      #dc2626; /* 神話：紅色為主 */
+  --color-accent-light:#f87171;
+  --color-accent-alpha: rgba(220, 38, 38, 0.4);
+
+  --color-text-primary:   #fee2e2;
+  --color-text-secondary: #f87171;
+  --color-text-muted:     #7f1d1d;
+  --color-text-accent:    #fee2e2;
+
+  --color-hp:  #dc2626;
+  --color-san: #7f1d1d;
+  --color-luck:#f87171;
+
+  --color-success:        #dc2626;
+  --color-partial-success:#f87171;
+  --color-failure:        #7f1d1d;
+  --color-critical:       #fee2e2;
+  --color-shadow-glow:    rgba(220, 38, 38, 0.5);
+
+  --gradient-bg: linear-gradient(135deg, #040101 0%, #140303 50%, #0d0202 100%);
+  --gradient-accent: linear-gradient(135deg, #dc2626, #7f1d1d);
+  --gradient-surface: linear-gradient(180deg, #300808, #210505);
+  --gradient-header: linear-gradient(90deg, rgba(220, 38, 38, 0.25), rgba(127, 29, 29, 0.15), transparent);
+}
+
+/* ===================================================
+   3D Theme Polish Tokens
+   =================================================== */
+:root,
+[data-theme="scifi-horror"] {
+  --color-bg-deep: #010714;
+  --color-bg-base: #041126;
+  --color-bg-surface: #081833;
+  --color-bg-elevated: #102647;
+  --color-bg-hover: #17345f;
+  --color-border: rgba(77, 129, 214, 0.28);
+  --color-border-strong: rgba(116, 169, 255, 0.66);
+  --color-accent: #2f6fed;
+  --color-accent-light: #91c7ff;
+  --color-accent-alpha: rgba(47, 111, 237, 0.28);
+  --color-text-primary: #e8f1ff;
+  --color-text-secondary: #a6bbd8;
+  --color-text-muted: #6e88ad;
+  --color-text-accent: #9ed0ff;
+  --color-shadow-glow: rgba(47, 111, 237, 0.42);
+  --gradient-bg: linear-gradient(135deg, #010714 0%, #041126 48%, #020817 100%);
+  --gradient-accent: linear-gradient(135deg, #2f6fed, #91c7ff);
+  --gradient-surface: linear-gradient(160deg, rgba(16,38,71,.94), rgba(8,24,51,.9));
+  --gradient-header: linear-gradient(90deg, rgba(47,111,237,.28), rgba(145,199,255,.12), transparent);
+  --theme-swatch-a: #07162f;
+  --theme-swatch-b: #2f6fed;
+  --theme-swatch-c: #9ed0ff;
+  --theme-pattern: linear-gradient(90deg, rgba(145,199,255,.12) 1px, transparent 1px), linear-gradient(0deg, rgba(145,199,255,.08) 1px, transparent 1px);
+  --theme-pattern-size: 28px 28px;
+  --theme-sigil: linear-gradient(90deg, transparent 45%, rgba(145,199,255,.34) 46% 54%, transparent 55%);
+}
+
+[data-theme="fantasy"] {
+  --color-bg-deep: #001013;
+  --color-bg-base: #031d21;
+  --color-bg-surface: #082b31;
+  --color-bg-elevated: #0e3d45;
+  --color-bg-hover: #12515b;
+  --color-border: rgba(24, 183, 201, 0.28);
+  --color-border-strong: rgba(103, 223, 230, 0.62);
+  --color-accent: #18b7c9;
+  --color-accent-light: #67dfe6;
+  --color-accent-alpha: rgba(24, 183, 201, 0.28);
+  --color-text-primary: #e2fbfb;
+  --color-text-secondary: #9bd9d8;
+  --color-text-muted: #6aa5a5;
+  --color-text-accent: #8ef4ef;
+  --color-shadow-glow: rgba(24, 183, 201, 0.36);
+  --gradient-bg: linear-gradient(135deg, #001013 0%, #031d21 52%, #00181a 100%);
+  --gradient-accent: linear-gradient(135deg, #18b7c9, #67dfe6);
+  --gradient-surface: linear-gradient(160deg, rgba(14,61,69,.94), rgba(8,43,49,.9));
+  --gradient-header: linear-gradient(90deg, rgba(24,183,201,.24), rgba(103,223,230,.12), transparent);
+  --theme-swatch-a: #05272b;
+  --theme-swatch-b: #18b7c9;
+  --theme-swatch-c: #b0f0e5;
+  --theme-pattern: radial-gradient(circle at 50% 50%, rgba(103,223,230,.18) 0 2px, transparent 3px), conic-gradient(from 45deg, transparent 0 22%, rgba(103,223,230,.08) 22% 28%, transparent 28% 100%);
+  --theme-pattern-size: 46px 46px;
+  --theme-sigil: conic-gradient(from 0deg, transparent 0 12%, rgba(103,223,230,.38) 12% 15%, transparent 15% 62%, rgba(103,223,230,.3) 62% 65%, transparent 65%);
+}
+
+[data-theme="steampunk"] {
+  --color-bg-deep: #0b0704;
+  --color-bg-base: #171008;
+  --color-bg-surface: #24180c;
+  --color-bg-elevated: #342412;
+  --color-bg-hover: #49341b;
+  --color-border: rgba(185, 130, 54, 0.3);
+  --color-border-strong: rgba(216, 167, 91, 0.68);
+  --color-accent: #b98236;
+  --color-accent-light: #d8a75b;
+  --color-accent-alpha: rgba(185, 130, 54, 0.28);
+  --color-text-primary: #f3e3c2;
+  --color-text-secondary: #c9a978;
+  --color-text-muted: #8f7650;
+  --color-text-accent: #e1bc75;
+  --color-shadow-glow: rgba(185, 130, 54, 0.38);
+  --gradient-bg: linear-gradient(135deg, #080503 0%, #171008 55%, #0f0a05 100%);
+  --gradient-accent: linear-gradient(135deg, #8c5d27, #d8a75b);
+  --gradient-surface: linear-gradient(160deg, rgba(52,36,18,.96), rgba(36,24,12,.92));
+  --gradient-header: linear-gradient(90deg, rgba(185,130,54,.26), rgba(216,167,91,.12), transparent);
+  --theme-swatch-a: #24180c;
+  --theme-swatch-b: #b98236;
+  --theme-swatch-c: #d8a75b;
+  --theme-pattern: radial-gradient(circle, rgba(216,167,91,.24) 0 2px, transparent 3px), linear-gradient(90deg, rgba(216,167,91,.08) 1px, transparent 1px);
+  --theme-pattern-size: 32px 32px;
+  --theme-sigil: repeating-conic-gradient(from 5deg, rgba(216,167,91,.38) 0 8deg, transparent 8deg 22deg);
+}
+
+[data-theme="cyberpunk"] {
+  --color-bg-deep: #030208;
+  --color-bg-base: #0b0614;
+  --color-bg-surface: #160b25;
+  --color-bg-elevated: #251039;
+  --color-bg-hover: #351654;
+  --color-border: rgba(240, 75, 176, 0.32);
+  --color-border-strong: rgba(33, 214, 210, 0.72);
+  --color-accent: #f04bb0;
+  --color-accent-light: #21d6d2;
+  --color-accent-alpha: rgba(240, 75, 176, 0.3);
+  --color-text-primary: #f6f2ff;
+  --color-text-secondary: #9ee7ea;
+  --color-text-muted: #b06ba8;
+  --color-text-accent: #ffe472;
+  --color-shadow-glow: rgba(240, 75, 176, 0.42);
+  --gradient-bg: linear-gradient(135deg, #020106 0%, #0b0614 45%, #040b12 100%);
+  --gradient-accent: linear-gradient(135deg, #f04bb0, #21d6d2 72%, #ffe472);
+  --gradient-surface: linear-gradient(160deg, rgba(37,16,57,.95), rgba(8,20,30,.92));
+  --gradient-header: linear-gradient(90deg, rgba(240,75,176,.28), rgba(33,214,210,.2), transparent);
+  --theme-swatch-a: #090615;
+  --theme-swatch-b: #f04bb0;
+  --theme-swatch-c: #21d6d2;
+  --theme-pattern: linear-gradient(90deg, rgba(33,214,210,.2) 0 1px, transparent 1px 20px), linear-gradient(0deg, rgba(240,75,176,.16) 0 1px, transparent 1px 18px);
+  --theme-pattern-size: 40px 36px;
+  --theme-sigil: linear-gradient(110deg, transparent 0 38%, rgba(33,214,210,.44) 38% 45%, transparent 45% 58%, rgba(240,75,176,.44) 58% 64%, transparent 64%);
+}
+
+[data-theme="future"] {
+  --color-bg-deep: #000000;
+  --color-bg-base: #050607;
+  --color-bg-surface: #0d0f11;
+  --color-bg-elevated: #171a1d;
+  --color-bg-hover: #24282d;
+  --color-border: rgba(255, 255, 255, 0.22);
+  --color-border-strong: rgba(245, 248, 252, 0.72);
+  --color-accent: #f4f7fb;
+  --color-accent-light: #ffffff;
+  --color-accent-alpha: rgba(255, 255, 255, 0.18);
+  --color-text-primary: #f4f7fb;
+  --color-text-secondary: #c6ccd4;
+  --color-text-muted: #8d96a3;
+  --color-text-accent: #ffffff;
+  --color-shadow-glow: rgba(255, 255, 255, 0.22);
+  --gradient-bg: linear-gradient(135deg, #000 0%, #050607 55%, #010203 100%);
+  --gradient-accent: linear-gradient(135deg, #ffffff, #8d96a3);
+  --gradient-surface: linear-gradient(160deg, rgba(23,26,29,.96), rgba(13,15,17,.92));
+  --gradient-header: linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.05), transparent);
+  --theme-swatch-a: #000000;
+  --theme-swatch-b: #f4f7fb;
+  --theme-swatch-c: #8d96a3;
+  --theme-pattern: radial-gradient(circle at 18% 20%, rgba(255,255,255,.34) 0 1px, transparent 2px), radial-gradient(circle at 70% 60%, rgba(255,255,255,.18) 0 1px, transparent 2px);
+  --theme-pattern-size: 54px 54px;
+  --theme-sigil: radial-gradient(circle, transparent 0 34%, rgba(255,255,255,.42) 35% 38%, transparent 39%);
+}
+
+[data-theme="abyss"] {
+  --color-bg-deep: #010806;
+  --color-bg-base: #04120d;
+  --color-bg-surface: #0a1f18;
+  --color-bg-elevated: #15233a;
+  --color-bg-hover: #1e2d4e;
+  --color-border: rgba(15, 143, 103, 0.3);
+  --color-border-strong: rgba(138, 110, 232, 0.66);
+  --color-accent: #0f8f67;
+  --color-accent-light: #8a6ee8;
+  --color-accent-alpha: rgba(15, 143, 103, 0.28);
+  --color-text-primary: #d9f5e8;
+  --color-text-secondary: #a7cbbf;
+  --color-text-muted: #6f9488;
+  --color-text-accent: #b6a8ff;
+  --color-shadow-glow: rgba(75, 63, 161, 0.42);
+  --gradient-bg: linear-gradient(135deg, #010806 0%, #04120d 50%, #10071a 100%);
+  --gradient-accent: linear-gradient(135deg, #0f8f67, #8a6ee8);
+  --gradient-surface: linear-gradient(160deg, rgba(10,31,24,.95), rgba(21,35,58,.9));
+  --gradient-header: linear-gradient(90deg, rgba(15,143,103,.25), rgba(138,110,232,.15), transparent);
+  --theme-swatch-a: #03110c;
+  --theme-swatch-b: #0f8f67;
+  --theme-swatch-c: #8a6ee8;
+  --theme-pattern: radial-gradient(ellipse at 50% 100%, rgba(138,110,232,.18) 0 10%, transparent 45%), linear-gradient(135deg, transparent 0 48%, rgba(15,143,103,.08) 49% 51%, transparent 52%);
+  --theme-pattern-size: 52px 52px;
+  --theme-sigil: radial-gradient(ellipse at 50% 50%, transparent 0 28%, rgba(138,110,232,.4) 30% 34%, transparent 36%);
+}
+
+[data-theme="hope"] {
+  --color-bg-deep: #e9f6ff;
+  --color-bg-base: #f7fcff;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #ecf7ff;
+  --color-bg-hover: #d9efff;
+  --color-border: rgba(53, 149, 211, 0.22);
+  --color-border-strong: rgba(53, 149, 211, 0.52);
+  --color-accent: #3595d3;
+  --color-accent-light: #78c8f6;
+  --color-accent-alpha: rgba(53, 149, 211, 0.18);
+  --color-text-primary: #122231;
+  --color-text-secondary: #42657e;
+  --color-text-muted: #6f879a;
+  --color-text-accent: #1e74ad;
+  --color-shadow-glow: rgba(53, 149, 211, 0.22);
+  --gradient-bg: linear-gradient(135deg, #f8fcff 0%, #e9f6ff 55%, #ffffff 100%);
+  --gradient-accent: linear-gradient(135deg, #3595d3, #9fdcff);
+  --gradient-surface: linear-gradient(160deg, rgba(255,255,255,.96), rgba(236,247,255,.9));
+  --gradient-header: linear-gradient(90deg, rgba(53,149,211,.18), rgba(120,200,246,.12), transparent);
+  --theme-swatch-a: #ffffff;
+  --theme-swatch-b: #78c8f6;
+  --theme-swatch-c: #3595d3;
+  --theme-pattern: radial-gradient(ellipse at 50% 0%, rgba(120,200,246,.24), transparent 48%), linear-gradient(90deg, transparent 0 46%, rgba(53,149,211,.08) 47% 53%, transparent 54%);
+  --theme-pattern-size: 58px 58px;
+  --theme-sigil: radial-gradient(circle at 50% 50%, rgba(120,200,246,.36) 0 18%, transparent 19%);
+}
+
+[data-theme="classical"] {
+  --color-bg-deep: #090805;
+  --color-bg-base: #151208;
+  --color-bg-surface: #211b0d;
+  --color-bg-elevated: #302716;
+  --color-bg-hover: #41341d;
+  --color-border: rgba(156, 122, 46, 0.32);
+  --color-border-strong: rgba(196, 157, 68, 0.64);
+  --color-accent: #9c7a2e;
+  --color-accent-light: #c49d44;
+  --color-accent-alpha: rgba(156, 122, 46, 0.28);
+  --color-text-primary: #eadbb8;
+  --color-text-secondary: #b9a06f;
+  --color-text-muted: #806b43;
+  --color-text-accent: #d1b45b;
+  --color-shadow-glow: rgba(156, 122, 46, 0.36);
+  --gradient-bg: linear-gradient(135deg, #070604 0%, #151208 52%, #0f0d08 100%);
+  --gradient-accent: linear-gradient(135deg, #80622a, #c49d44);
+  --gradient-surface: linear-gradient(160deg, rgba(48,39,22,.96), rgba(33,27,13,.92));
+  --gradient-header: linear-gradient(90deg, rgba(156,122,46,.24), rgba(196,157,68,.12), transparent);
+  --theme-swatch-a: #211b0d;
+  --theme-swatch-b: #9c7a2e;
+  --theme-swatch-c: #d1b45b;
+  --theme-pattern: linear-gradient(45deg, rgba(196,157,68,.1) 12.5%, transparent 12.5% 50%, rgba(196,157,68,.1) 50% 62.5%, transparent 62.5%);
+  --theme-pattern-size: 34px 34px;
+  --theme-sigil: radial-gradient(circle, transparent 0 26%, rgba(196,157,68,.38) 27% 31%, transparent 32%), linear-gradient(90deg, transparent 42%, rgba(196,157,68,.28) 43% 57%, transparent 58%);
+}
+
+[data-theme="epic"] {
+  --color-bg-deep: #080705;
+  --color-bg-base: #15120a;
+  --color-bg-surface: #211b0c;
+  --color-bg-elevated: #332810;
+  --color-bg-hover: #473819;
+  --color-border: rgba(214, 168, 74, 0.32);
+  --color-border-strong: rgba(235, 205, 119, 0.72);
+  --color-accent: #d6a84a;
+  --color-accent-light: #ebcd77;
+  --color-accent-alpha: rgba(214, 168, 74, 0.3);
+  --color-text-primary: #fff0c7;
+  --color-text-secondary: #d9c184;
+  --color-text-muted: #9c7f42;
+  --color-text-accent: #f4d77e;
+  --color-shadow-glow: rgba(214, 168, 74, 0.4);
+  --gradient-bg: linear-gradient(135deg, #050403 0%, #15120a 54%, #0b0904 100%);
+  --gradient-accent: linear-gradient(135deg, #a97a2f, #ebcd77);
+  --gradient-surface: linear-gradient(160deg, rgba(51,40,16,.96), rgba(33,27,12,.92));
+  --gradient-header: linear-gradient(90deg, rgba(214,168,74,.28), rgba(235,205,119,.13), transparent);
+  --theme-swatch-a: #18130a;
+  --theme-swatch-b: #d6a84a;
+  --theme-swatch-c: #ebcd77;
+  --theme-pattern: linear-gradient(120deg, transparent 0 44%, rgba(235,205,119,.12) 45% 47%, transparent 48%), linear-gradient(60deg, transparent 0 48%, rgba(235,205,119,.08) 49% 51%, transparent 52%);
+  --theme-pattern-size: 48px 48px;
+  --theme-sigil: conic-gradient(from 45deg, transparent 0 10%, rgba(235,205,119,.46) 10% 15%, transparent 15% 35%, rgba(235,205,119,.36) 35% 40%, transparent 40%);
+}
+
+[data-theme="mythology"] {
+  --color-bg-deep: #080202;
+  --color-bg-base: #170606;
+  --color-bg-surface: #260a0a;
+  --color-bg-elevated: #3a1010;
+  --color-bg-hover: #501717;
+  --color-border: rgba(199, 71, 62, 0.32);
+  --color-border-strong: rgba(232, 115, 98, 0.68);
+  --color-accent: #c7473e;
+  --color-accent-light: #e87362;
+  --color-accent-alpha: rgba(199, 71, 62, 0.28);
+  --color-text-primary: #ffe3dc;
+  --color-text-secondary: #d9a09a;
+  --color-text-muted: #9a6560;
+  --color-text-accent: #ffb3a5;
+  --color-shadow-glow: rgba(199, 71, 62, 0.38);
+  --gradient-bg: linear-gradient(135deg, #070101 0%, #170606 52%, #100303 100%);
+  --gradient-accent: linear-gradient(135deg, #9e312d, #e87362);
+  --gradient-surface: linear-gradient(160deg, rgba(58,16,16,.96), rgba(38,10,10,.92));
+  --gradient-header: linear-gradient(90deg, rgba(199,71,62,.26), rgba(232,115,98,.12), transparent);
+  --theme-swatch-a: #170606;
+  --theme-swatch-b: #c7473e;
+  --theme-swatch-c: #ffb3a5;
+  --theme-pattern: linear-gradient(45deg, transparent 0 44%, rgba(232,115,98,.12) 45% 48%, transparent 49%), radial-gradient(circle at 50% 50%, rgba(232,115,98,.12) 0 2px, transparent 3px);
+  --theme-pattern-size: 42px 42px;
+  --theme-sigil: conic-gradient(from 180deg, transparent 0 18%, rgba(232,115,98,.46) 18% 22%, transparent 22% 58%, rgba(232,115,98,.32) 58% 62%, transparent 62%);
+}
+
+/* ===================================================
+   Distinct Mixed Palettes + Animated Background Tokens
+   =================================================== */
+:root,
+[data-theme="scifi-horror"] {
+  --color-bg-deep: #01081f;
+  --color-bg-base: #03133a;
+  --color-bg-surface: #071b47;
+  --color-bg-elevated: #102b5d;
+  --color-bg-hover: #193d78;
+  --color-accent: #245bff;
+  --color-accent-light: #70e4ff;
+  --color-text-accent: #a5f3ff;
+  --color-border-strong: rgba(112, 228, 255, .68);
+  --color-shadow-glow: rgba(36, 91, 255, .42);
+  --gradient-bg: linear-gradient(135deg, #01081f 0%, #03133a 42%, #100637 100%);
+  --gradient-accent: linear-gradient(135deg, #245bff, #70e4ff 58%, #8d67ff);
+  --gradient-surface: linear-gradient(160deg, rgba(16,43,93,.95), rgba(7,27,71,.88) 58%, rgba(18,9,56,.88));
+  --theme-swatch-a: #01081f;
+  --theme-swatch-b: #245bff;
+  --theme-swatch-c: #70e4ff;
+  --theme-pattern: linear-gradient(90deg, rgba(112,228,255,.14) 1px, transparent 1px), linear-gradient(0deg, rgba(141,103,255,.1) 1px, transparent 1px);
+  --theme-pattern-size: 34px 34px;
+  --motion-layer-a: linear-gradient(115deg, transparent 0 38%, rgba(112,228,255,.22) 40% 42%, transparent 45% 100%);
+  --motion-layer-b: repeating-linear-gradient(90deg, transparent 0 20px, rgba(141,103,255,.08) 21px 22px, transparent 23px 44px);
+  --motion-layer-c: radial-gradient(ellipse at 18% 20%, rgba(36,91,255,.38), transparent 42%), radial-gradient(ellipse at 78% 70%, rgba(112,228,255,.24), transparent 46%);
+}
+
+[data-theme="fantasy"] {
+  --color-bg-deep: #001411;
+  --color-bg-base: #05261f;
+  --color-bg-surface: #0a382d;
+  --color-bg-elevated: #114f43;
+  --color-bg-hover: #176759;
+  --color-accent: #12c7b0;
+  --color-accent-light: #ffb36b;
+  --color-text-accent: #a6ffe8;
+  --color-border-strong: rgba(255, 179, 107, .62);
+  --color-shadow-glow: rgba(18, 199, 176, .34);
+  --gradient-bg: linear-gradient(135deg, #001411 0%, #05261f 44%, #2b1d08 100%);
+  --gradient-accent: linear-gradient(135deg, #12c7b0, #9bd86f 54%, #ffb36b);
+  --gradient-surface: linear-gradient(160deg, rgba(17,79,67,.94), rgba(10,56,45,.9) 58%, rgba(43,29,8,.82));
+  --theme-swatch-a: #05261f;
+  --theme-swatch-b: #12c7b0;
+  --theme-swatch-c: #ffb36b;
+  --theme-pattern: conic-gradient(from 45deg, rgba(255,179,107,.12) 0 8%, transparent 8% 42%, rgba(155,216,111,.1) 42% 48%, transparent 48%), radial-gradient(circle, rgba(18,199,176,.18) 0 2px, transparent 3px);
+  --theme-pattern-size: 58px 58px;
+  --motion-layer-a: radial-gradient(ellipse at 22% 78%, rgba(18,199,176,.28), transparent 48%), radial-gradient(ellipse at 80% 24%, rgba(255,179,107,.2), transparent 42%);
+  --motion-layer-b: conic-gradient(from 0deg at 50% 50%, transparent 0 18%, rgba(155,216,111,.1) 20% 25%, transparent 28% 100%);
+  --motion-layer-c: linear-gradient(125deg, transparent 0 42%, rgba(255,179,107,.16) 44% 45%, transparent 47%);
+}
+
+[data-theme="steampunk"] {
+  --color-bg-deep: #100904;
+  --color-bg-base: #211407;
+  --color-bg-surface: #33210f;
+  --color-bg-elevated: #4a3218;
+  --color-bg-hover: #644625;
+  --color-accent: #c98a35;
+  --color-accent-light: #5fb7a1;
+  --color-text-accent: #f2c477;
+  --color-border-strong: rgba(201, 138, 53, .7);
+  --color-shadow-glow: rgba(201, 138, 53, .36);
+  --gradient-bg: linear-gradient(135deg, #100904 0%, #211407 48%, #08241f 100%);
+  --gradient-accent: linear-gradient(135deg, #c98a35, #f0bd73 50%, #5fb7a1);
+  --gradient-surface: linear-gradient(160deg, rgba(74,50,24,.96), rgba(51,33,15,.9) 55%, rgba(8,36,31,.78));
+  --theme-swatch-a: #211407;
+  --theme-swatch-b: #c98a35;
+  --theme-swatch-c: #5fb7a1;
+  --theme-pattern: radial-gradient(circle, rgba(240,189,115,.26) 0 2px, transparent 3px), repeating-linear-gradient(90deg, rgba(95,183,161,.08) 0 1px, transparent 1px 22px);
+  --theme-pattern-size: 36px 36px;
+  --motion-layer-a: repeating-conic-gradient(from 0deg at 20% 30%, rgba(201,138,53,.12) 0 8deg, transparent 8deg 20deg);
+  --motion-layer-b: linear-gradient(100deg, transparent 0 30%, rgba(95,183,161,.14) 34%, transparent 42% 100%);
+  --motion-layer-c: radial-gradient(ellipse at 80% 18%, rgba(240,189,115,.26), transparent 42%), radial-gradient(ellipse at 14% 82%, rgba(95,183,161,.22), transparent 48%);
+}
+
+[data-theme="cyberpunk"] {
+  --color-bg-deep: #03030d;
+  --color-bg-base: #0c0620;
+  --color-bg-surface: #1a0d32;
+  --color-bg-elevated: #2b1450;
+  --color-bg-hover: #3e1b72;
+  --color-accent: #ff3bbd;
+  --color-accent-light: #00e7ff;
+  --color-text-accent: #f7ff55;
+  --color-border-strong: rgba(0, 231, 255, .78);
+  --color-shadow-glow: rgba(255, 59, 189, .42);
+  --gradient-bg: linear-gradient(135deg, #03030d 0%, #0c0620 40%, #001d24 78%, #261000 100%);
+  --gradient-accent: linear-gradient(135deg, #ff3bbd, #00e7ff 46%, #f7ff55 76%, #ff8a2a);
+  --gradient-surface: linear-gradient(160deg, rgba(43,20,80,.95), rgba(0,29,36,.88) 58%, rgba(38,16,0,.78));
+  --theme-swatch-a: #0c0620;
+  --theme-swatch-b: #ff3bbd;
+  --theme-swatch-c: #00e7ff;
+  --theme-pattern: linear-gradient(90deg, rgba(0,231,255,.22) 0 1px, transparent 1px 18px), linear-gradient(0deg, rgba(255,59,189,.18) 0 1px, transparent 1px 16px), linear-gradient(135deg, transparent 0 47%, rgba(247,255,85,.1) 48% 50%, transparent 51%);
+  --theme-pattern-size: 42px 38px;
+  --motion-layer-a: linear-gradient(110deg, transparent 0 38%, rgba(255,59,189,.26) 39% 41%, transparent 42% 55%, rgba(0,231,255,.2) 56% 58%, transparent 60%);
+  --motion-layer-b: repeating-linear-gradient(0deg, transparent 0 13px, rgba(247,255,85,.09) 14px 15px, transparent 16px 29px);
+  --motion-layer-c: radial-gradient(ellipse at 14% 20%, rgba(255,59,189,.34), transparent 38%), radial-gradient(ellipse at 82% 75%, rgba(0,231,255,.28), transparent 44%);
+}
+
+[data-theme="future"] {
+  --color-bg-deep: #000000;
+  --color-bg-base: #05070d;
+  --color-bg-surface: #0d111c;
+  --color-bg-elevated: #171d2b;
+  --color-bg-hover: #252d3d;
+  --color-accent: #f8fbff;
+  --color-accent-light: #86a9ff;
+  --color-text-accent: #ffffff;
+  --color-border-strong: rgba(248, 251, 255, .76);
+  --color-shadow-glow: rgba(134, 169, 255, .26);
+  --gradient-bg: linear-gradient(135deg, #000 0%, #05070d 46%, #111f3d 100%);
+  --gradient-accent: linear-gradient(135deg, #ffffff, #86a9ff 52%, #6ff5ff);
+  --gradient-surface: linear-gradient(160deg, rgba(23,29,43,.96), rgba(13,17,28,.92) 64%, rgba(17,31,61,.82));
+  --theme-swatch-a: #000000;
+  --theme-swatch-b: #ffffff;
+  --theme-swatch-c: #86a9ff;
+  --theme-pattern: radial-gradient(circle at 18% 20%, rgba(255,255,255,.42) 0 1px, transparent 2px), radial-gradient(circle at 70% 60%, rgba(134,169,255,.28) 0 1px, transparent 2px), linear-gradient(120deg, transparent 0 49%, rgba(111,245,255,.08) 50%, transparent 51%);
+  --theme-pattern-size: 58px 58px;
+  --motion-layer-a: radial-gradient(ellipse at 50% 50%, transparent 0 34%, rgba(134,169,255,.18) 35% 37%, transparent 38%);
+  --motion-layer-b: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,.18) 46% 47%, transparent 48%);
+  --motion-layer-c: radial-gradient(ellipse at 75% 18%, rgba(111,245,255,.2), transparent 42%), radial-gradient(ellipse at 18% 80%, rgba(134,169,255,.22), transparent 48%);
+}
+
+[data-theme="abyss"] {
+  --color-bg-deep: #000d09;
+  --color-bg-base: #031810;
+  --color-bg-surface: #09261b;
+  --color-bg-elevated: #172541;
+  --color-bg-hover: #23315c;
+  --color-accent: #0aa976;
+  --color-accent-light: #9d6cff;
+  --color-text-accent: #aef6d6;
+  --color-border-strong: rgba(157, 108, 255, .68);
+  --color-shadow-glow: rgba(10, 169, 118, .34);
+  --gradient-bg: linear-gradient(135deg, #000d09 0%, #031810 45%, #180b2b 100%);
+  --gradient-accent: linear-gradient(135deg, #0aa976, #1fd2c0 44%, #9d6cff);
+  --gradient-surface: linear-gradient(160deg, rgba(9,38,27,.96), rgba(23,37,65,.9) 58%, rgba(24,11,43,.82));
+  --theme-swatch-a: #031810;
+  --theme-swatch-b: #0aa976;
+  --theme-swatch-c: #9d6cff;
+  --theme-pattern: radial-gradient(ellipse at 50% 100%, rgba(157,108,255,.2) 0 10%, transparent 45%), linear-gradient(135deg, transparent 0 48%, rgba(31,210,192,.1) 49% 51%, transparent 52%);
+  --theme-pattern-size: 58px 58px;
+  --motion-layer-a: radial-gradient(ellipse at 30% 80%, rgba(10,169,118,.3), transparent 45%), radial-gradient(ellipse at 70% 20%, rgba(157,108,255,.26), transparent 42%);
+  --motion-layer-b: conic-gradient(from 90deg at 50% 55%, transparent 0 25%, rgba(31,210,192,.1) 28% 34%, transparent 38% 100%);
+  --motion-layer-c: linear-gradient(140deg, transparent 0 42%, rgba(157,108,255,.14) 44% 45%, transparent 47%);
+}
+
+[data-theme="hope"] {
+  --color-bg-deep: #eefbff;
+  --color-bg-base: #fbfdff;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #edf8ff;
+  --color-bg-hover: #dff2ff;
+  --color-accent: #4aa9e8;
+  --color-accent-light: #ffb98f;
+  --color-text-accent: #176da8;
+  --color-border-strong: rgba(74, 169, 232, .54);
+  --color-shadow-glow: rgba(74, 169, 232, .2);
+  --gradient-bg: linear-gradient(135deg, #fbfdff 0%, #eefbff 46%, #fff0e8 100%);
+  --gradient-accent: linear-gradient(135deg, #4aa9e8, #9cdbff 52%, #ffb98f);
+  --gradient-surface: linear-gradient(160deg, rgba(255,255,255,.98), rgba(237,248,255,.92) 60%, rgba(255,240,232,.82));
+  --theme-swatch-a: #ffffff;
+  --theme-swatch-b: #4aa9e8;
+  --theme-swatch-c: #ffb98f;
+  --theme-pattern: radial-gradient(ellipse at 50% 0%, rgba(156,219,255,.26), transparent 48%), linear-gradient(90deg, transparent 0 46%, rgba(255,185,143,.12) 47% 53%, transparent 54%);
+  --theme-pattern-size: 64px 64px;
+  --motion-layer-a: radial-gradient(ellipse at 25% 20%, rgba(156,219,255,.34), transparent 45%), radial-gradient(ellipse at 78% 76%, rgba(255,185,143,.28), transparent 42%);
+  --motion-layer-b: linear-gradient(115deg, transparent 0 38%, rgba(74,169,232,.12) 40% 42%, transparent 45%);
+  --motion-layer-c: radial-gradient(ellipse at 50% -5%, rgba(255,255,255,.75), transparent 52%);
+}
+
+[data-theme="classical"] {
+  --color-bg-deep: #0d0a05;
+  --color-bg-base: #1d160b;
+  --color-bg-surface: #2c2212;
+  --color-bg-elevated: #3f321d;
+  --color-bg-hover: #55442a;
+  --color-accent: #a6843d;
+  --color-accent-light: #8aa06d;
+  --color-text-accent: #dcc070;
+  --color-border-strong: rgba(166, 132, 61, .68);
+  --color-shadow-glow: rgba(166, 132, 61, .34);
+  --gradient-bg: linear-gradient(135deg, #0d0a05 0%, #1d160b 48%, #2c1017 100%);
+  --gradient-accent: linear-gradient(135deg, #a6843d, #dcc070 50%, #8aa06d);
+  --gradient-surface: linear-gradient(160deg, rgba(63,50,29,.96), rgba(44,34,18,.92) 58%, rgba(44,16,23,.78));
+  --theme-swatch-a: #1d160b;
+  --theme-swatch-b: #a6843d;
+  --theme-swatch-c: #8aa06d;
+  --theme-pattern: linear-gradient(45deg, rgba(220,192,112,.1) 12.5%, transparent 12.5% 50%, rgba(138,160,109,.1) 50% 62.5%, transparent 62.5%);
+  --theme-pattern-size: 38px 38px;
+  --motion-layer-a: linear-gradient(120deg, transparent 0 42%, rgba(220,192,112,.14) 44% 45%, transparent 47%);
+  --motion-layer-b: radial-gradient(ellipse at 15% 18%, rgba(166,132,61,.26), transparent 42%), radial-gradient(ellipse at 85% 78%, rgba(138,160,109,.18), transparent 45%);
+  --motion-layer-c: repeating-linear-gradient(90deg, transparent 0 35px, rgba(220,192,112,.07) 36px 37px, transparent 38px 70px);
+}
+
+[data-theme="epic"] {
+  --color-bg-deep: #080604;
+  --color-bg-base: #191106;
+  --color-bg-surface: #2a1d0b;
+  --color-bg-elevated: #3f2d12;
+  --color-bg-hover: #5a421f;
+  --color-accent: #e0b650;
+  --color-accent-light: #637bff;
+  --color-text-accent: #ffe192;
+  --color-border-strong: rgba(224, 182, 80, .76);
+  --color-shadow-glow: rgba(224, 182, 80, .38);
+  --gradient-bg: linear-gradient(135deg, #080604 0%, #191106 42%, #101845 78%, #3a0810 100%);
+  --gradient-accent: linear-gradient(135deg, #e0b650, #ffe192 42%, #637bff 72%, #d64654);
+  --gradient-surface: linear-gradient(160deg, rgba(63,45,18,.96), rgba(42,29,11,.9) 56%, rgba(16,24,69,.78));
+  --theme-swatch-a: #191106;
+  --theme-swatch-b: #e0b650;
+  --theme-swatch-c: #637bff;
+  --theme-pattern: linear-gradient(120deg, transparent 0 44%, rgba(255,225,146,.14) 45% 47%, transparent 48%), linear-gradient(60deg, transparent 0 48%, rgba(99,123,255,.11) 49% 51%, transparent 52%);
+  --theme-pattern-size: 52px 52px;
+  --motion-layer-a: conic-gradient(from 45deg at 50% 40%, transparent 0 10%, rgba(255,225,146,.18) 11% 15%, transparent 16% 34%, rgba(99,123,255,.12) 35% 39%, transparent 40%);
+  --motion-layer-b: radial-gradient(ellipse at 22% 18%, rgba(224,182,80,.3), transparent 42%), radial-gradient(ellipse at 78% 80%, rgba(214,70,84,.18), transparent 45%);
+  --motion-layer-c: linear-gradient(100deg, transparent 0 44%, rgba(99,123,255,.14) 45% 46%, transparent 48%);
+}
+
+[data-theme="mythology"] {
+  --color-bg-deep: #0d0204;
+  --color-bg-base: #22070b;
+  --color-bg-surface: #351018;
+  --color-bg-elevated: #4f1723;
+  --color-bg-hover: #6d2130;
+  --color-accent: #d94848;
+  --color-accent-light: #34c39a;
+  --color-text-accent: #ffb0a6;
+  --color-border-strong: rgba(217, 72, 72, .72);
+  --color-shadow-glow: rgba(217, 72, 72, .38);
+  --gradient-bg: linear-gradient(135deg, #0d0204 0%, #22070b 48%, #06231b 100%);
+  --gradient-accent: linear-gradient(135deg, #d94848, #ff9e6e 48%, #34c39a);
+  --gradient-surface: linear-gradient(160deg, rgba(79,23,35,.96), rgba(53,16,24,.9) 58%, rgba(6,35,27,.78));
+  --theme-swatch-a: #22070b;
+  --theme-swatch-b: #d94848;
+  --theme-swatch-c: #34c39a;
+  --theme-pattern: linear-gradient(45deg, transparent 0 44%, rgba(255,158,110,.14) 45% 48%, transparent 49%), radial-gradient(circle at 50% 50%, rgba(52,195,154,.13) 0 2px, transparent 3px);
+  --theme-pattern-size: 46px 46px;
+  --motion-layer-a: conic-gradient(from 180deg at 50% 45%, transparent 0 18%, rgba(217,72,72,.22) 19% 23%, transparent 24% 58%, rgba(52,195,154,.14) 59% 63%, transparent 64%);
+  --motion-layer-b: radial-gradient(ellipse at 20% 22%, rgba(217,72,72,.3), transparent 42%), radial-gradient(ellipse at 82% 78%, rgba(52,195,154,.22), transparent 45%);
+  --motion-layer-c: repeating-linear-gradient(135deg, transparent 0 28px, rgba(255,158,110,.08) 29px 30px, transparent 31px 56px);
+}
+
+/* ===================================================
+   CSS Reset & 全域基礎樣式
+   =================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* 強化背景深度 */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 20%, var(--color-accent-alpha), transparent),
+    var(--gradient-bg);
+}
+
+a { color: var(--color-text-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  font-family: var(--font-ui);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: var(--font-ui);
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-alpha);
+}
+
+select option {
+  background: var(--color-bg-elevated);
+}
+
+/* ===================================================
+   主佈局（CSS Grid）
+   =================================================== */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- 頂部導覽列 (毛玻璃) --- */
+#header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background: rgba(10, 11, 15, 0.6);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-bottom: 1px solid var(--color-border);
+  z-index: var(--z-panel);
+}
+
+#header .game-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--color-text-accent);
+  text-shadow: 0 0 16px var(--color-accent-alpha);
+}
+
+#header .header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* --- 主要內容區（左中右三欄） --- */
+#main-content {
+  flex: 1 1 0;
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --- 場景區域 --- */
+#scene-area {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  gap: var(--space-4);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#scene-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+
+/* --- 行動選項區 (毛玻璃) --- */
+#action-area {
+  grid-column: 2;
+  grid-row: 2;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#action-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+
+/* --- 右側欄位 (毛玻璃) --- */
+#sidebar {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#sidebar:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+
+/* --- 遊戲紀錄（Log，毛玻璃）--- */
+#game-log-area {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  font-size: .82rem;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-normal);
+}
+#game-log-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+
+/* ===================================================
+   捲軸樣式（強化）
+   =================================================== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-accent-alpha), var(--color-border-strong));
+  border-radius: var(--radius-full);
+  transition: background 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-light));
+  box-shadow: 0 0 6px var(--color-accent-alpha);
+}
+
+/* ===================================================
+   通用工具類
+   =================================================== */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.w-full { width: 100%; }
+.text-sm { font-size: .875rem; }
+.text-xs { font-size: .75rem; }
+.text-accent { color: var(--color-text-accent); }
+.text-muted { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
+.font-mono { font-family: var(--font-mono); }
+
+/* ===================================================
+   Overlay（半透明遮罩）
+   =================================================== */
+.overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .7);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--transition-normal) ease;
+}
+
+/* ===================================================
+   Toast 通知
+   =================================================== */
+#toast-container {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: var(--z-toast);
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  font-size: .875rem;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .3s ease;
+  opacity: 1;
+  transition: opacity .3s ease;
+  white-space: nowrap;
+}
+.toast.success { border-color: var(--color-success); color: var(--color-success); }
+.toast.error   { border-color: var(--color-failure); color: var(--color-failure); }
+.toast.info    { border-color: var(--color-accent);  color: var(--color-text-accent); }
+.toast.fade-out { opacity: 0; }
+
+/* ===================================================
+   載入中動畫
+   =================================================== */
+#loading-indicator {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(2px);
+  z-index: var(--z-dice);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.loading-spinner {
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-right-color: var(--color-accent-light);
+  border-radius: 50%;
+  animation: spin 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+  box-shadow:
+    0 0 0 4px var(--color-accent-alpha),
+    0 0 24px var(--color-accent-alpha);
+}
+
+.loading-text {
+  color: var(--color-text-secondary);
+  font-size: .95rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===================================================
+   關鍵幀動畫
+   =================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 8px var(--color-accent-alpha); }
+  50% { box-shadow: 0 0 24px var(--color-accent-alpha), 0 0 48px var(--color-accent-alpha); }
+}
+
+@keyframes rollDice {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(90deg) scale(1.2); }
+  50%  { transform: rotate(180deg) scale(0.8); }
+  75%  { transform: rotate(270deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%  { transform: translateX(-6px) rotate(-2deg); }
+  40%  { transform: translateX(6px) rotate(2deg); }
+  60%  { transform: translateX(-4px) rotate(-1deg); }
+  80%  { transform: translateX(4px) rotate(1deg); }
+}
+
+@keyframes typewriter {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* ===================================================
+   響應式：小螢幕調整
+   =================================================== */
+@media (max-width: 900px) {
+  #main-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto auto auto;
+  }
+  #scene-area {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  gap: var(--space-4);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#scene-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+  #action-area {
+  grid-column: 2;
+  grid-row: 2;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#action-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+  #sidebar {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  transition: all var(--transition-normal);
+}
+#sidebar:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+  #game-log-area {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  background: var(--gradient-surface);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.06), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.4),
+    0 8px 24px -6px var(--color-shadow-glow);
+  font-size: .82rem;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-normal);
+}
+#game-log-area:hover {
+  transform: translateY(-2px) scale(1.002);
+  box-shadow: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.08), 
+    inset -1px -1px 0px rgba(0, 0, 0, 0.3),
+    0 12px 32px -4px var(--color-shadow-glow);
+  border-color: var(--color-border-strong);
+}
+}

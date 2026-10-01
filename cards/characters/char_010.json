@@ -1,0 +1,24 @@
+{
+  "id": "char_010",
+  "name": "王阿傑",
+  "class": "外送員",
+  "age": 22,
+  "gender": "男",
+  "personality": "開朗、急躁、方向感極佳",
+  "wealth": "貧窮",
+  "background": "全職的機車外送員，每天穿梭在大街小巷。反應速度快，體力充足，對於城市的地形和捷徑瞭如指掌。",
+  "stats": { "STR": 55, "DEX": 70, "INT": 40, "POW": 45, "MOV": 75 },
+  "derived_stats": { "HP": 100, "SAN": 45, "LUCK": 60 },
+  "skills": [
+    { "id": "skill_drive", "name": "機車駕駛", "bonus": 4, "type": "DEX" },
+    { "id": "skill_navigate", "name": "城市認路", "bonus": 3, "type": "INT" },
+    { "id": "skill_stamina", "name": "體能", "bonus": 2, "type": "STR" }
+  ],
+  "inventory": [
+    { "item": "智慧型手機", "quantity": 1 },
+    { "item": "機車鑰匙", "quantity": 1 },
+    { "item": "保溫袋", "quantity": 1 }
+  ],
+  "status_effects": [],
+  "temp_modifiers": []
+}

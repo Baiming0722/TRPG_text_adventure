@@ -1,0 +1,50 @@
+{
+  "id": "map_002",
+  "name": "死寂宿舍區",
+  "description": "研究人員與員工的起居空間，現在卻空無一人，到處都是混亂的痕跡。",
+  "nodes": [
+    {
+      "id": "node_dorm_entrance",
+      "name": "宿舍入口",
+      "description": "連接著地下設施與生活區的緩衝大廳，警衛桌上散落著一些物品。",
+      "events": ["event_004"],
+      "connections": ["node_dorm_hallway"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_dorm_hallway",
+      "name": "宿舍走廊",
+      "description": "長長的走廊兩側是一排排的寢室門。日光燈閃爍不定，牆上有幾道血痕。",
+      "events": [],
+      "connections": ["node_dorm_entrance", "node_survivor_room", "node_elevator_hall"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_survivor_room",
+      "name": "半掩的寢室",
+      "description": "這間寢室的門沒有關緊，裡面似乎有人躲藏過，物品散落一地。",
+      "events": ["event_005"],
+      "connections": ["node_dorm_hallway"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_elevator_hall",
+      "name": "電梯大廳",
+      "description": "走廊盡頭是通往上層管理區的專用電梯。電梯面板上亮著紅燈，需要輸入密碼。",
+      "events": ["event_006"],
+      "connections": ["node_dorm_hallway"],
+      "entry_condition": {
+        "flag": "found_survivor_diary",
+        "fail_message": "你不知道電梯密碼，或許該去其他房間找找線索。"
+      },
+      "explored": false,
+      "locked": true
+    }
+  ]
+}

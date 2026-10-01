@@ -1,0 +1,50 @@
+{
+  "id": "map_003",
+  "name": "管理層與深淵檔案室",
+  "description": "設施高階主管的辦公區域以及儲存最高機密的中央檔案室。",
+  "nodes": [
+    {
+      "id": "node_office_hall",
+      "name": "高級辦公區",
+      "description": "鋪著地毯的寬敞區域，非常整潔，與底層的混亂形成強烈對比。",
+      "events": ["event_007"],
+      "connections": ["node_security_room", "node_archive_door"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_security_room",
+      "name": "安保控制室",
+      "description": "監控整個樓層的控制中心，這裡有許多亮著警告紅燈的終端機。",
+      "events": ["event_008"],
+      "connections": ["node_office_hall"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_archive_door",
+      "name": "檔案室大門",
+      "description": "一扇厚重的防爆裝甲門，門口的讀卡機已經損壞，半開著一道縫隙。",
+      "events": [],
+      "connections": ["node_office_hall", "node_core_server"],
+      "entry_condition": null,
+      "explored": false,
+      "locked": false
+    },
+    {
+      "id": "node_core_server",
+      "name": "核心伺服器室",
+      "description": "充滿了伺服器機櫃的冰冷房間，中央的主機台正閃爍著資料傳輸的光芒。",
+      "events": ["event_009"],
+      "connections": ["node_archive_door"],
+      "entry_condition": {
+        "flag": "bypassed_security",
+        "fail_message": "系統處於鎖定狀態，必須先從安保室覆寫權限。"
+      },
+      "explored": false,
+      "locked": true
+    }
+  ]
+}

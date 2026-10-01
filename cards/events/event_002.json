@@ -1,0 +1,23 @@
+{
+  "id": "event_002",
+  "title": "走廊的血跡",
+  "description": "在走廊中發現血跡，觸發恐懼判定",
+  "trigger_condition": {
+    "flag": "door_unlocked"
+  },
+  "effects": [
+    {
+      "type": "stat_change",
+      "stat": "SAN",
+      "delta": -10,
+      "description": "目睹血跡，理智值下降"
+    },
+    {
+      "type": "set_flag",
+      "key": "saw_blood",
+      "value": true,
+      "description": "目擊血腥場面"
+    }
+  ],
+  "narrative": "走廊牆壁上有一道長長的暗紅色痕跡，像是有人被拖行所留下的。空氣中有股隱約的銅腥味，你的胃部不由得緊縮了一下。"
+}

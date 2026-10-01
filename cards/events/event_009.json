@@ -1,0 +1,15 @@
+{
+  "id": "event_010",
+  "title": "深入地底",
+  "description": "玩家抵達地下鐵道月台",
+  "trigger_condition": { "flag": "downloaded_core_data" },
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "entered_railway",
+      "value": true,
+      "description": "進入地下鐵道區域"
+    }
+  ],
+  "narrative": "刺耳的警報聲在整個設施迴盪，自毀倒數已經開始。你循著路線圖狂奔到了最底層的地下鐵道月台。一列老舊的運輸車停在鐵軌上，這是你重見天日的最後希望。"
+}

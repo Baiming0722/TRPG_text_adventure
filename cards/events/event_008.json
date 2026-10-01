@@ -1,0 +1,15 @@
+{
+  "id": "event_009",
+  "title": "深淵的真相",
+  "description": "玩家成功下載核心資料",
+  "trigger_condition": { "flag": "bypassed_security" },
+  "effects": [
+    {
+      "type": "set_flag",
+      "key": "downloaded_core_data",
+      "value": true,
+      "description": "下載深淵計畫核心資料"
+    }
+  ],
+  "narrative": "隨著進度條跑滿，大量資料湧入你的隨身碟。你匆匆瞥過幾份文件，發現所謂的「深淵計畫」竟然是在研究如何將某種遠古病毒與人體結合。而更令你毛骨悚然的是，受試者名單的最後一頁，赫然寫著你的名字。"
+}

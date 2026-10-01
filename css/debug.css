@@ -1,0 +1,161 @@
+/* css/debug.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0a0c10;
+  --surface: #111318;
+  --elevated: #181c24;
+  --border: rgba(100,140,200,.15);
+  --accent: #4a9eff;
+  --text: #c8d4e8;
+  --muted: #4a5a7a;
+  --success: #3dd68c;
+  --warn: #f0a832;
+  --error: #e05252;
+  --font: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#debug-app { display: flex; flex-direction: column; height: 100vh; }
+
+/* 頂部 */
+#debug-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+#debug-header h1 { font-size: 1rem; font-weight: 600; color: var(--accent); }
+.debug-status { font-size: .75rem; color: var(--muted); }
+.debug-status.live { color: var(--success); }
+.debug-status.paused { color: var(--warn); }
+
+#debug-controls { margin-left: auto; display: flex; gap: 8px; }
+.dbg-btn {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--elevated);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: .78rem;
+  cursor: pointer;
+  transition: all .15s;
+}
+.dbg-btn:hover { border-color: var(--accent); color: var(--accent); }
+.dbg-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* Tab 分頁 */
+#debug-tabs {
+  display: flex; gap: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex: 0 0 auto;
+  overflow-x: auto;
+}
+.tab-btn {
+  padding: 8px 18px;
+  border: none; border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  font-family: var(--font); font-size: .8rem;
+  cursor: pointer; white-space: nowrap;
+  transition: all .15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* 內容區 */
+#debug-content { flex: 1 1 0; overflow-y: auto; padding: 16px 20px; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Section */
+.dbg-section { margin-bottom: 20px; }
+.dbg-section-title {
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+/* 表格 */
+.dbg-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.dbg-table th {
+  text-align: left; padding: 4px 8px;
+  color: var(--muted); font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+.dbg-table td { padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,.04); }
+.dbg-table tr:hover td { background: rgba(255,255,255,.03); }
+
+/* 屬性格子 */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; }
+.stat-box {
+  background: var(--elevated); border-radius: 8px;
+  padding: 8px; text-align: center;
+}
+.stat-box-label { font-size: .65rem; color: var(--muted); }
+.stat-box-value { font-size: 1.2rem; font-weight: 600; color: var(--accent); font-family: var(--mono); }
+
+/* Prompt 顯示 */
+.prompt-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.prompt-role { font-size: .7rem; font-weight: 700; color: var(--accent); margin-bottom: 6px; letter-spacing: .08em; }
+.prompt-content {
+  font-family: var(--mono); font-size: .75rem;
+  color: var(--text); white-space: pre-wrap;
+  max-height: 200px; overflow-y: auto;
+  line-height: 1.5;
+}
+
+/* 節點標記 */
+.node-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: .8rem;
+}
+.node-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; }
+.node-dot.current  { background: var(--accent); }
+.node-dot.explored { background: var(--success); }
+.node-dot.accessible { background: var(--warn); }
+.node-dot.locked   { background: var(--muted); }
+
+/* 旗標表格 */
+.flag-item {
+  display: flex; gap: 8px;
+  font-family: var(--mono); font-size: .75rem;
+  padding: 2px 0;
+}
+.flag-key { color: var(--muted); }
+.flag-val { color: var(--success); }
+
+/* 骰子記錄 */
+.dice-row { border-bottom: 1px solid rgba(255,255,255,.04); padding: 6px 0; }
+.dice-outcome { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: .7rem; font-weight: 700; }
+.dice-outcome.critical_success { background: rgba(255,107,53,.2); color: #ff6b35; }
+.dice-outcome.success          { background: rgba(61,214,140,.2); color: var(--success); }
+.dice-outcome.partial_success  { background: rgba(240,168,50,.2); color: var(--warn); }
+.dice-outcome.failure          { background: rgba(224,82,82,.15); color: var(--error); }
+.dice-outcome.critical_failure { background: rgba(224,82,82,.25); color: var(--error); }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
