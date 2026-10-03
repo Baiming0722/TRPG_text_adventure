@@ -1,4 +1,4 @@
-# TRPG Adventure Engine
+# TRPG_text_adventure
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
@@ -7,7 +7,7 @@
 ![LLM Powered](https://img.shields.io/badge/LLM-DeepSeek%20%7C%20Ollama%20%7C%20NVIDIA%20%7C%20OpenRouter-8A2BE2?style=flat-square)
 ![License MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-**TRPG Adventure Engine** 是一款專為瀏覽器環境打造的輕量、高擴充性「大型語言模型（LLM）驅動文字冒險 TRPG 遊戲引擎」。
+**TRPG_text_adventure** 是一款專為瀏覽器環境打造的輕量、高擴充性「大型語言模型（LLM）驅動文字冒險 TRPG 遊戲引擎」。
 
 本專案融合了經典桌上角色扮演遊戲（TRPG）的確定性規則引擎（八大屬性檢定、技能修正、透明 2d6 擲骰、回合制戰鬥、節點地圖探索）與現代生成式 AI（動態場景演化、NPC 深度對話、語意情境推演）。玩家無需繁瑣設定，即可享受充滿未知變數與深厚敘事張力的角色扮演冒險。
 
